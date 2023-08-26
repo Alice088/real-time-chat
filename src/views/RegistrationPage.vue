@@ -20,9 +20,20 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("@/assets/bg-horizontally-dark.svg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
+}
+
+@media (orientation: portrait) {
+  .registration {
+    // background-image: url("var(--ThemePortain)");
+  }
+}
+
+@media (orientation: landscape) {
+  .registration {
+    // background-image: url("var(--ThemeLandscape)");
+  }
 }
 </style>
