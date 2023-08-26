@@ -8,13 +8,15 @@
 </template>
 
 <script lang="ts">
-export default {
+import { defineComponent } from "vue";
+
+export default defineComponent({
   data() {
     return {
       login: null,
     };
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>

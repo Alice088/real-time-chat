@@ -6,12 +6,13 @@
 
 <script lang="ts">
 import DialogLoginIn from "@/components/DialogLoginIn.vue";
+import { defineComponent } from "vue";
 
-export default {
+export default defineComponent({
   components: {
     DialogLoginIn,
   },
-};
+});
 </script>
 
 <style lang="scss" scoped>
