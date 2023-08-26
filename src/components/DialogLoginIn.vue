@@ -8,17 +8,11 @@
 </template>
 
 <script lang="ts">
-import MyInput from "@/components/UI/Myinput.vue";
-
 export default {
   data() {
     return {
       login: null,
     };
-  },
-
-  components: {
-    MyInput,
   },
 };
 </script>

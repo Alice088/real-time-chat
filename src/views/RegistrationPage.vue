@@ -19,7 +19,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-image: url("@/assets/blob-scene-haikei(1).svg");
+  background-image: url("@/assets/bg-horizontally-dark.svg");
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;

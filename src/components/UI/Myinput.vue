@@ -3,14 +3,18 @@
   <input type="text" :value="login" />
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import { defineComponent } from "vue";
+
+export default defineComponent({
   data() {
     return {
       login: null,
     };
   },
-};
+
+  name: `MyInput`,
+});
 </script>
 
 <style lang="scss" scoped>
