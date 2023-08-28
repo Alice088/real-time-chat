@@ -10,7 +10,7 @@
     <form action="" method="post">
       <MyInput placeholder="LOGIN" />
       <MyInput placeholder="PASSWORD" type="password" />
-      <MyButton>Submit</MyButton>
+      <MyButton @click.prevent="">Submit</MyButton>
     </form>
   </div>
 </template>
@@ -37,7 +37,8 @@ export default defineComponent({
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-width: 80vw;
+  max-width: max-content;
+  min-width: min-content;
   min-height: max-content;
   outline: purple solid 4px;
   border: #eb45cf 3px solid;
@@ -60,21 +61,30 @@ export default defineComponent({
     button {
       margin-top: 5px;
     }
+
+    input {
+      width: 80vw;
+    }
   }
 
   img {
-    max-width: 80vw;
+    max-width: 90%;
+    min-width: 1%;
+    margin: 20px;
   }
 }
 
 @media (max-width: 680px) {
   .dialog {
     min-width: 100vw;
-    padding: 0;
     outline: none;
     box-shadow: none;
     border: none;
     background: none;
+
+    &:hover {
+      box-shadow: none;
+    }
 
     form {
       width: 100%;
@@ -84,7 +94,7 @@ export default defineComponent({
 
 @media (max-width: 510px) {
   img {
-    width: 200vw;
+    width: 70vw;
   }
 }
 </style>

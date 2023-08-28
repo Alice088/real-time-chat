@@ -6,6 +6,7 @@
       { darkTheme: $store.state.theme.dark },
     ]"
   >
+    <div class="themeBar"><ThemeButton /></div>
     <DialogLoginIn />
   </div>
 </template>
@@ -31,6 +32,10 @@ export default defineComponent({
   background-size: cover;
   height: 100vh;
 }
+
+.themeBar {
+}
+
 .lightTheme {
   background-image: url("@/assets/bg-horizontally-light.svg");
 }

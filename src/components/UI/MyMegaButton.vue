@@ -16,7 +16,8 @@ button {
   border-radius: 20px;
   max-height: 50px;
   min-height: 50px;
-  width: 80vw;
+  max-width: 100%;
+  min-width: 100%;
   transition: 200ms filter ease-in-out;
   font-family: "Shrikhand", cursive;
   font-size: 1.5em;
@@ -24,6 +25,10 @@ button {
 
   &:hover {
     filter: brightness(90%);
+  }
+
+  &:active {
+    filter: brightness(50%);
   }
 }
 </style>
