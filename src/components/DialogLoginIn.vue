@@ -35,8 +35,6 @@ export default defineComponent({
 .dialog {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   max-width: max-content;
   min-width: min-content;
   min-height: max-content;
@@ -60,10 +58,13 @@ export default defineComponent({
 
     button {
       margin-top: 5px;
+      max-width: 80vw;
+      min-width: 80vw;
     }
 
     input {
-      width: 80vw;
+      max-width: 80vw;
+      min-width: 80vw;
     }
   }
 

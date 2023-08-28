@@ -1,6 +1,6 @@
 <template>
   <button @click="changeTheme">
-    <img src="@/assets/icons/dark-theme.svg" alt="logo-dark" ref="themeLogo" />
+    <img :src="src" alt="theme-icon" />
   </button>
 </template>
 
@@ -11,6 +11,14 @@ import { mapMutations } from "vuex";
 export default defineComponent({
   name: `ThemeButton`,
 
+  data() {
+    return {
+      src: require(`@/assets/icons/dark-theme.svg`),
+      darkIcon: require(`@/assets/icons/dark-theme.svg`),
+      lightIcon: require(`@/assets/icons/light-theme.svg`),
+    };
+  },
+
   methods: {
     ...mapMutations({
       changeTheme: `theme/changeTheme`,
@@ -19,8 +27,14 @@ export default defineComponent({
 
   watch: {
     "$store.state.theme.dark": function () {
-      if (this.$store.state.theme.dark) {
-        let img = this.$refs.themeLogo as HTMLImageElement;
+      switch (this.$store.state.theme.dark) {
+        case true:
+          this.src = this.lightIcon;
+          break;
+
+        case false:
+          this.src = this.darkIcon;
+          break;
       }
     },
   },
@@ -28,7 +42,16 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 img {
-  width: 50px;
-  height: 50px;
+  max-width: 50px;
+  min-width: 50px;
+  max-height: 50px;
+  min-height: 50px;
+  filter: drop-shadow(0 0 5px black);
+}
+
+button {
+  background: none;
+  outline: none;
+  border: none;
 }
 </style>
