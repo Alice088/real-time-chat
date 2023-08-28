@@ -1,5 +1,11 @@
 <template>
-  <div class="registration">
+  <div
+    class="registration"
+    :class="[
+      { lightTheme: !$store.state.theme.dark },
+      { darkTheme: $store.state.theme.dark },
+    ]"
+  >
     <DialogLoginIn />
   </div>
 </template>
@@ -18,22 +24,30 @@ export default defineComponent({
 <style lang="scss" scoped>
 .registration {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;
 }
+.lightTheme {
+  background-image: url("@/assets/bg-horizontally-light.svg");
+}
 
 @media (orientation: portrait) {
-  .registration {
-    // background-image: url("var(--ThemePortain)");
+  .lightTheme {
+    background-image: url("@/assets/bg-virtically-ligth.svg");
   }
 }
 
-@media (orientation: landscape) {
-  .registration {
-    // background-image: url("var(--ThemeLandscape)");
+.darkTheme {
+  background-image: url("@/assets/bg-horizontally-dark.svg");
+}
+
+@media (orientation: portrait) {
+  .darkTheme {
+    background-image: url("@/assets/bg-virtically-dark.svg");
   }
 }
 </style>

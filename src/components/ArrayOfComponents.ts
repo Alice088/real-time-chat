@@ -1,5 +1,6 @@
-import MyinputVue from "./UI/Myinput.vue";
+import Myinput from "@/components/UI/Myinput.vue";
+import MyButton from "@/components/UI/MyMegaButton.vue";
 
-const components = [MyinputVue];
+const components = [Myinput, MyButton];
 
 export default components;
