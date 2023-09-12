@@ -1,5 +1,5 @@
 <template>
-  <button @click="changeTheme">
+  <button @click.prevent="changeTheme">
     <img :src="src" alt="theme-icon" />
   </button>
 </template>
@@ -13,7 +13,7 @@ export default defineComponent({
 
   data() {
     return {
-      src: require(`@/assets/icons/dark-theme.svg`),
+      src: require(`@/assets/icons/light-theme.svg`),
       darkIcon: require(`@/assets/icons/dark-theme.svg`),
       lightIcon: require(`@/assets/icons/light-theme.svg`),
     };
@@ -47,6 +47,7 @@ img {
   max-height: 50px;
   min-height: 50px;
   filter: drop-shadow(0 0 5px black);
+  margin: 10px;
 }
 
 button {

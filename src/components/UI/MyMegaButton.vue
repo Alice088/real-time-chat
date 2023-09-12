@@ -1,5 +1,12 @@
 <template>
-  <button><slot></slot></button>
+  <button
+    :class="[
+      { lightThemeButton: !$store.state.theme.dark },
+      { darkThemeButton: $store.state.theme.dark },
+    ]"
+  >
+    <slot></slot>
+  </button>
 </template>
 
 <script lang="ts">
@@ -11,17 +18,15 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 button {
-  background: #eb45cf;
-  border: purple solid 3px;
-  border-radius: 20px;
+  border-radius: 5px;
   max-height: 50px;
   min-height: 50px;
-  max-width: 100%;
-  min-width: 100%;
   transition: 200ms filter ease-in-out;
   font-family: "Shrikhand", cursive;
   font-size: 1.5em;
-  color: #001220;
+  color: #ff0066;
+  border: none;
+  outline: none;
 
   &:hover {
     filter: brightness(90%);
@@ -30,5 +35,15 @@ button {
   &:active {
     filter: brightness(50%);
   }
+}
+
+.darkThemeButton {
+  border: #ff0066 solid 1px;
+  background: #001122;
+}
+
+.lightThemeButton {
+  border: #ff0066 solid 1px;
+  background: white;
 }
 </style>

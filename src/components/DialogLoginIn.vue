@@ -1,101 +1,145 @@
 <template>
-  <div class="dialog">
-    <picture>
-      <source
-        media="(max-width: 510px)"
-        srcset="@/assets/icons/logo-mini.svg"
+  <Toast :style="{ maxWidth: `90vw` }" />
+  <form
+    action=""
+    method="post"
+    class="dialog"
+    :class="[
+      { lightThemeDialog: !$store.state.theme.dark },
+      { darkThemeDialog: $store.state.theme.dark },
+    ]"
+    v-on="$attrs"
+  >
+    <ThemeButton class="themeButton" />
+
+    <div class="placeForm">
+      <MyInput
+        @click="showRule"
+        @blur="hideRule"
+        v-model="login"
+        placeholder="LOGIN"
+        autofocus
+        type="text"
       />
-      <img src="@/assets/icons/GoshaStarChatIcon.png" alt="Logo" />
-    </picture>
-    <form action="" method="post">
-      <MyInput placeholder="LOGIN" />
-      <MyInput placeholder="PASSWORD" type="password" />
-      <MyButton @click.prevent="">Submit</MyButton>
-    </form>
-  </div>
+
+      <MyInput
+        @click="showRule"
+        @blur="hideRule"
+        v-model="password"
+        placeholder="PASSWORD"
+        type="password"
+      />
+      <OverlayPanel ref="op" :style="{ margin: `10px` }">
+        <strong>
+          Количество символов должно быть не больше 20 и поле не должно быть
+          пустым
+        </strong>
+      </OverlayPanel>
+
+      <MyButton @click.prevent="showToastMessage" label="showMessage">
+        Submit
+      </MyButton>
+    </div>
+  </form>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 import { mapState, mapMutations } from "vuex";
+import useValidationPost from "@/hooks/validationForms";
 
 export default defineComponent({
+  data() {
+    return {
+      login: null,
+      password: null,
+    };
+  },
+
   methods: {
     ...mapMutations({
       changeTheme: `theme/changeTheme`,
     }),
+
     ...mapState({
       IsDark: `theme/dark`,
     }),
+
+    showToastMessage() {
+      if (useValidationPost(this.login, this.password)) {
+        this.$toast.add({
+          severity: "success",
+          summary: "Все прошло успешно",
+          detail: "Данные отправлены",
+          life: 3000,
+        });
+      } else {
+        this.$toast.add({
+          severity: "error",
+          summary: "Ошибка",
+          detail: "Ошибка на сервере или в неккоректной форме ввода",
+          life: 3000,
+        });
+      }
+    },
+
+    showRule(event: object) {
+      this.$refs.op.toggle(event);
+    },
+
+    hideRule(event: object) {
+      if (this.$refs.op) {
+        this.$refs.op.hide(event);
+      } else {
+        return;
+      }
+    },
   },
 });
 </script>
 
 <style lang="scss" scoped>
 .dialog {
-  display: flex;
-  flex-direction: column;
-  max-width: max-content;
-  min-width: min-content;
-  min-height: max-content;
-  outline: purple solid 4px;
-  border: #eb45cf 3px solid;
-  box-shadow: 0 0 12px 10px rgb(79, 0, 128);
-  background: #001220;
-  border-radius: 20px;
-  padding: 30px;
-  row-gap: 5vw;
-  transition: 300ms ease-in-out box-shadow;
+  display: grid;
+  grid-template-rows: max-content 50% 50%;
+  max-width: 100%;
+  min-width: 100%;
+  max-height: 100%;
+  min-height: 100%;
+  transition: 300ms ease-in-out;
+  padding: 20px;
+  backdrop-filter: blur(300px);
 
-  &:hover {
-    box-shadow: 0 0 30px 12px rgb(79, 0, 128);
+  button {
+    max-width: 100%;
+    min-width: 100%;
   }
 
-  form {
+  input {
+    max-width: 100%;
+    min-width: 100%;
+  }
+
+  .placeForm {
     display: flex;
     flex-direction: column;
-    align-items: center;
-
-    button {
-      margin-top: 5px;
-      max-width: 80vw;
-      min-width: 80vw;
-    }
-
-    input {
-      max-width: 80vw;
-      min-width: 80vw;
-    }
+    justify-content: end;
+    gap: 20px;
   }
 
-  img {
-    max-width: 90%;
-    min-width: 1%;
-    margin: 20px;
+  .themeButton {
+    display: flex;
+    align-items: start;
   }
 }
 
-@media (max-width: 680px) {
-  .dialog {
-    min-width: 100vw;
-    outline: none;
-    box-shadow: none;
-    border: none;
-    background: none;
-
-    &:hover {
-      box-shadow: none;
-    }
-
-    form {
-      width: 100%;
-    }
-  }
+.darkThemeDialog {
+  background-color: #001122be;
+  border-left: 1px rgba(255, 255, 255, 0.08) solid;
 }
 
-@media (max-width: 510px) {
-  img {
-    width: 70vw;
-  }
+.lightThemeDialog {
+  background-color: #ffffff1c;
+  border-left: 1px rgba(0, 0, 0, 0.26) solid;
 }
 </style>

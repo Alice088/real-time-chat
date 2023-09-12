@@ -1,41 +1,64 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <input type="text" autofocus :class="[{}]" />
+  <input
+    type="text"
+    :value="modelValue"
+    @input="$emit('update:modelValue', $event.target.value)"
+    :class="[
+      { lightThemeInput: !$store.state.theme.dark },
+      { darkThemeInput: $store.state.theme.dark },
+    ]"
+  />
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
 
 export default defineComponent({
+  props: {
+    modelValue: [String, Number],
+  },
+  emits: ["update:modelValue"],
   name: `MyInput`,
 });
 </script>
 
 <style lang="scss" scoped>
 input {
-  margin: 20px;
-  color: #001220;
+  color: #ff0066;
   text-align: center;
   font-family: "Shrikhand", cursive;
-  max-width: 100%;
-  min-width: 100%;
   padding: 10px;
-  border-radius: 20px;
-  border-color: white;
-  border: #ff006688 3px solid;
+  border-radius: 5px;
+  border: none;
   outline: none;
   font-size: 1.5em;
   font-stretch: ultra-expanded;
-  transition: 200ms ease-in-out;
-  transition-property: box-shadow outline;
-
-  &:focus {
-    outline: purple solid 4px;
-    box-shadow: 0 0 30px 5px rgba(128, 0, 128, 0.853);
-  }
+  transition: 150ms ease-in-out;
+  transition-property: box-shadow border;
 
   &:active {
     filter: brightness(90%);
+  }
+}
+
+.darkThemeInput {
+  border: 1px rgba(255, 255, 255, 0.08) solid;
+  border-left: 2px #ff0066 solid;
+  background-color: #001122;
+
+  &:focus {
+    border: 1px #ff0066 solid;
+  }
+}
+
+.lightThemeInput {
+  border: 1px rgba(0, 0, 0, 0.321) solid;
+  border-left: 2px #ff0066 solid;
+  background-color: rgb(255, 255, 255);
+
+  &:focus {
+    border: 1px #ff0066 solid;
   }
 }
 </style>

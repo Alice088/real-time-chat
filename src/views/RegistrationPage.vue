@@ -6,8 +6,9 @@
       { darkTheme: $store.state.theme.dark },
     ]"
   >
-    <ThemeButton class="themeBar" />
-    <DialogLoginIn class="dialogLoginIn" />
+    <div class="dialogLoginIn">
+      <DialogLoginIn />
+    </div>
   </div>
 </template>
 
@@ -25,27 +26,24 @@ export default defineComponent({
 <style lang="scss" scoped>
 .registration {
   display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 2fr;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
+  height: 100svh;
 }
 
 .dialogLoginIn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  grid-row: 2 / 3;
-  grid-column: 1 / 2;
-  justify-self: center;
+  grid-column: 2 / 2;
 }
 
-.themeBar {
-  margin: 20px;
-  justify-self: end;
-  grid-row: 1 / 2;
-  grid-column: 1 / 2;
+@media (max-width: 1066px) {
+  .registration {
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+  }
+  .dialogLoginIn {
+    grid-column: 1 / 2;
+  }
 }
 
 .lightTheme {
