@@ -29,7 +29,12 @@
         placeholder="PASSWORD"
         type="password"
       />
-      <OverlayPanel ref="op" :style="{ margin: `10px` }">
+      <OverlayPanel
+        ref="inputRules"
+        :pt="{
+          root: { style: `margin: 10px;` },
+        }"
+      >
         <strong>
           Количество символов должно быть не больше 20 и поле не должно быть
           пустым
@@ -84,12 +89,12 @@ export default defineComponent({
     },
 
     showRule(event: object) {
-      this.$refs.op.toggle(event);
+      this.$refs.inputRules.toggle(event);
     },
 
     hideRule(event: object) {
-      if (this.$refs.op) {
-        this.$refs.op.hide(event);
+      if (this.$refs.inputRules) {
+        this.$refs.inputRules.hide(event);
       } else {
         return;
       }
