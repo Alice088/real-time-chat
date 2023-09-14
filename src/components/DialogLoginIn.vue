@@ -21,25 +21,47 @@
         autofocus
         type="text"
       />
-
-      <MyInput
-        @click="showRule"
-        @blur="hideRule"
+      <Password
         v-model="password"
-        placeholder="PASSWORD"
-        type="password"
-      />
-      <OverlayPanel
-        ref="inputRules"
+        placeholder="Пароль"
+        promptLabel="Придумайте пароль"
+        weakLabel="Простой"
+        mediumLabel="средний"
+        strongLabel="Хороший"
         :pt="{
-          root: { style: `margin: 10px;` },
+          input: {
+            style: `
+              max-width: 100%;
+              min-width: 100%;
+              text-align: center;`,
+          },
+
+          panel: {
+            style: `
+              display: flex,
+              column-gap: 20px;
+
+              ul {
+                display: flex,
+                column-gap: 20px;
+              }
+              `,
+          },
         }"
+        toggleMask
       >
-        <strong>
-          Количество символов должно быть не больше 20 и поле не должно быть
-          пустым
-        </strong>
-      </OverlayPanel>
+        <template #header>
+          <h6>Pick a password</h6>
+        </template>
+        <template #footer>
+          <Divider type="solid" />
+          <p>Правила ввода</p>
+          <ul class="rulesList">
+            <li>не больше 20 символова</li>
+            <li>не должен быть пустой</li>
+          </ul>
+        </template>
+      </Password>
 
       <MyButton @click.prevent="showToastMessage" label="showMessage">
         Submit
@@ -104,6 +126,19 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+.rulesList {
+  display: flex;
+  flex-direction: column;
+
+  li {
+    margin-top: 10px;
+  }
+
+  li:before {
+    content: "◉ ";
+    color: red;
+  }
+}
 .dialog {
   display: grid;
   grid-template-rows: max-content 50% 50%;
@@ -116,11 +151,6 @@ export default defineComponent({
   backdrop-filter: blur(300px);
 
   button {
-    max-width: 100%;
-    min-width: 100%;
-  }
-
-  input {
     max-width: 100%;
     min-width: 100%;
   }

@@ -1,25 +1,18 @@
 import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./router";
-import store from "./store";
+import { Component } from "vue";
+
+import App from "@/App.vue";
+import router from "@/router";
+import store from "@/store";
 import components from "@/components/ArrayOfComponents";
 import PrimeVue from "primevue/config";
-import "primevue/resources/themes/lara-light-indigo/theme.css";
+import "primevue/resources/themes/soho-dark/theme.css";
 import ToastService from "primevue/toastservice";
-import Toast from "primevue/toast";
-import OverlayPanel from "primevue/overlaypanel";
 
 const app = createApp(App);
 
-components.forEach((component): void => {
+components.forEach((component: Component): void => {
   app.component(component.name, component);
 });
 
-app
-  .use(PrimeVue)
-  .component("Toast", Toast)
-  .component("OverlayPanel", OverlayPanel)
-  .use(ToastService)
-  .use(store)
-  .use(router)
-  .mount("#app");
+app.use(PrimeVue).use(ToastService).use(store).use(router).mount("#app");

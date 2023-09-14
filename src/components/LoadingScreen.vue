@@ -1,6 +1,6 @@
 <template>
   <div class="loadingScreen">
-    <img src="@/assets/icons/loading.gif" alt="loadig" />
+    <ProgressSpinner />
   </div>
 </template>
 
@@ -14,6 +14,7 @@ export default defineComponent({
 
 <style lang="scss">
 .loadingScreen {
+  background-color: #001122;
   display: flex;
   width: 100svw;
   height: 100svh;

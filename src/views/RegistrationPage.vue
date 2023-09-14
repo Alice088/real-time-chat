@@ -47,22 +47,10 @@ export default defineComponent({
 }
 
 .lightTheme {
-  background-image: url("@/assets/bg-horizontally-light.svg");
-}
-
-@media (orientation: portrait) {
-  .lightTheme {
-    background-image: url("@/assets/bg-virtically-ligth.svg");
-  }
+  background-image: url("@/assets/background-light.jpg");
 }
 
 .darkTheme {
-  background-image: url("@/assets/bg-horizontally-dark.svg");
-}
-
-@media (orientation: portrait) {
-  .darkTheme {
-    background-image: url("@/assets/bg-virtically-dark.svg");
-  }
+  background-image: url("@/assets/backgroundForest-dark.jpg");
 }
 </style>
