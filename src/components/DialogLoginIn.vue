@@ -1,5 +1,5 @@
 <template>
-  <Toast :style="{ maxWidth: `90vw` }" />
+  <Toast :style="{ maxWidth: `98vw`, right: `5px` }" />
   <form
     action=""
     method="post"
@@ -30,36 +30,20 @@
         strongLabel="Хороший"
         :pt="{
           input: {
-            style: `
-              max-width: 100%;
-              min-width: 100%;
-              text-align: center;`,
-          },
-
-          panel: {
-            style: `
-              display: flex,
-              column-gap: 20px;
-
-              ul {
-                display: flex,
-                column-gap: 20px;
-              }
-              `,
+            class: `w-full text-center`,
           },
         }"
         toggleMask
       >
-        <template #header>
-          <h6>Pick a password</h6>
-        </template>
         <template #footer>
-          <Divider type="solid" />
-          <p>Правила ввода</p>
-          <ul class="rulesList">
-            <li>не больше 20 символова</li>
-            <li>не должен быть пустой</li>
-          </ul>
+          <div class="border-t-[1px] border-solid border-gray-700 mt-5 pt-5">
+            <strong>Правила ввода:</strong>
+
+            <ul class="rulesList [&_li]:font-bold">
+              <li>не больше 20 символова</li>
+              <li>не должен быть пустой</li>
+            </ul>
+          </div>
         </template>
       </Password>
 
@@ -135,8 +119,8 @@ export default defineComponent({
   }
 
   li:before {
-    content: "◉ ";
-    color: red;
+    content: "● ";
+    color: grey;
   }
 }
 .dialog {

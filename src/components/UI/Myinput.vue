@@ -1,6 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <input
+    class="bg-red-950"
     type="text"
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
