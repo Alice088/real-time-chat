@@ -6,9 +6,8 @@ import router from "@/router";
 import store from "@/store";
 import components from "@/components/ArrayOfComponents";
 import PrimeVue from "primevue/config";
-import "primevue/resources/themes/soho-dark/theme.css";
 import ToastService from "primevue/toastservice";
-import Divider from "primevue/divider";
+import "primeicons/primeicons.css";
 
 const app = createApp(App);
 
@@ -16,10 +15,4 @@ components.forEach((component: Component): void => {
   app.component(component.name, component);
 });
 
-app
-  .use(PrimeVue)
-  .component("Divider", Divider)
-  .use(ToastService)
-  .use(store)
-  .use(router)
-  .mount("#app");
+app.use(PrimeVue).use(ToastService).use(store).use(router).mount("#app");

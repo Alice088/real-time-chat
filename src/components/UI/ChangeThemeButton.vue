@@ -23,10 +23,31 @@ export default defineComponent({
     ...mapMutations({
       changeTheme: `theme/changeTheme`,
     }),
+
+    changeThemeOfPrimeVue(state: { dark: boolean }): void {
+      if (state) {
+        this.$primevue.changeTheme(
+          "soho-light",
+          "soho-dark",
+          "theme-link",
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
+          () => {}
+        );
+      } else {
+        this.$primevue.changeTheme(
+          "soho-dark",
+          "soho-light",
+          "theme-link",
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
+          () => {}
+        );
+      }
+    },
   },
 
   watch: {
     "$store.state.theme.dark": function () {
+      this.changeThemeOfPrimeVue(this.$store.state.theme.dark);
       switch (this.$store.state.theme.dark) {
         case true:
           this.src = this.lightIcon;

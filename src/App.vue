@@ -23,9 +23,9 @@ export default defineComponent({
 </script>
 
 <style lang="scss">
-@tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import url("https://fonts.googleapis.com/css2?family=Shrikhand&display=swap");
 html {
   background-color: #001122;

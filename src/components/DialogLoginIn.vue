@@ -1,5 +1,12 @@
 <template>
-  <Toast :style="{ maxWidth: `98vw`, right: `5px` }" />
+  <Toast
+    :style="{ minWidth: `10vw`, maxWidth: `98vw`, right: `5px` }"
+    :pt="{
+      buttonContainer: {
+        class: `p-2 pr-3`,
+      },
+    }"
+  />
   <form
     action=""
     method="post"
@@ -10,17 +17,24 @@
     ]"
     v-on="$attrs"
   >
-    <ThemeButton class="themeButton" />
+    <ThemeButton class="themeButton focus: outline-green-950" />
 
     <div class="placeForm">
-      <MyInput
-        @click="showRule"
-        @blur="hideRule"
-        v-model="login"
-        placeholder="LOGIN"
-        autofocus
-        type="text"
-      />
+      <span class="p-input-icon-right">
+        <i class="pi pi-user" />
+        <InputText
+          aria-describedby="loginInput"
+          v-model="login"
+          placeholder="Логин"
+          autofocus
+          :pt="{
+            root: {
+              class: `w-full text-center border-[2px] focus:outline`,
+            },
+          }"
+        />
+      </span>
+
       <Password
         v-model="password"
         placeholder="Пароль"
@@ -30,7 +44,7 @@
         strongLabel="Хороший"
         :pt="{
           input: {
-            class: `w-full text-center`,
+            class: `w-full text-center border-[2px]`,
           },
         }"
         toggleMask
@@ -40,16 +54,22 @@
             <strong>Правила ввода:</strong>
 
             <ul class="rulesList [&_li]:font-bold">
-              <li>не больше 20 символова</li>
+              <li>не больше 20 символов</li>
               <li>не должен быть пустой</li>
             </ul>
           </div>
         </template>
       </Password>
 
-      <MyButton @click.prevent="showToastMessage" label="showMessage">
-        Submit
-      </MyButton>
+      <Button
+        @click.prevent="showToastMessage"
+        icon="pi pi-send"
+        iconPos="right"
+        label="Отправить"
+        :pt="{
+          root: { class: 'focus:outline-none' },
+        }"
+      />
     </div>
   </form>
 </template>
@@ -77,7 +97,9 @@ export default defineComponent({
     }),
 
     showToastMessage() {
-      if (useValidationPost(this.login, this.password)) {
+      const validResult = useValidationPost(this.login, this.password);
+
+      if (validResult.result) {
         this.$toast.add({
           severity: "success",
           summary: "Все прошло успешно",
@@ -88,7 +110,7 @@ export default defineComponent({
         this.$toast.add({
           severity: "error",
           summary: "Ошибка",
-          detail: "Ошибка на сервере или в неккоректной форме ввода",
+          detail: validResult.error,
           life: 3000,
         });
       }
