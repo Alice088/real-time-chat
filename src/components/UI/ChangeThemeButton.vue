@@ -1,6 +1,6 @@
 <template>
   <button @click.prevent="changeTheme">
-    <img :src="src" alt="icon Theme" ref="iconTheme" />
+    <img :src="src" alt="icon Theme" />
   </button>
 </template>
 
