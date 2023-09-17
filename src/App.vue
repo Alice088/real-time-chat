@@ -8,20 +8,12 @@
   </router-view>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script lang="ts" setup>
+import { ref, onMounted } from "vue";
 
-export default defineComponent({
-  data() {
-    return {
-      isLoading: true,
-    };
-  },
+const isLoading = ref(true);
 
-  mounted() {
-    setTimeout(() => (this.isLoading = !this.isLoading), 1000);
-  },
-});
+onMounted(() => setTimeout(() => (isLoading.value = !isLoading.value), 1000));
 </script>
 
 <style lang="scss">
