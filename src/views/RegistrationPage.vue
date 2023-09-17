@@ -50,7 +50,21 @@ export default defineComponent({
   background-image: url("@/assets/background-light.jpg");
 }
 
+@media (max-width: 1000px) {
+  .lightTheme {
+    background-image: none;
+    background-color: rgb(227, 227, 227);
+  }
+}
+
 .darkTheme {
   background-image: url("@/assets/backgroundForest-dark.jpg");
+}
+
+@media (max-width: 1000px) {
+  .darkTheme {
+    background-image: none;
+    background-color: #001122;
+  }
 }
 </style>

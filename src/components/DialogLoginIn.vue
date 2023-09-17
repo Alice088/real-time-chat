@@ -62,73 +62,23 @@
       </Password>
 
       <Button
-        @click.prevent="showToastMessage"
+        @click.prevent="showToastMessage(login, password, toast)"
         icon="pi pi-send"
         iconPos="right"
         label="Отправить"
-        :pt="{
-          root: { class: 'focus:outline-none' },
-        }"
       />
     </div>
   </form>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
-import { mapState, mapMutations } from "vuex";
-import useValidationPost from "@/hooks/validationForms";
+<script lang="ts" setup>
+import showToastMessage from "@/hooks/showToastMessage";
+import { ref } from "vue";
+import { useToast } from "primevue/usetoast";
 
-export default defineComponent({
-  data() {
-    return {
-      login: null,
-      password: null,
-    };
-  },
-
-  methods: {
-    ...mapMutations({
-      changeTheme: `theme/changeTheme`,
-    }),
-
-    ...mapState({
-      IsDark: `theme/dark`,
-    }),
-
-    showToastMessage() {
-      const validResult = useValidationPost(this.login, this.password);
-
-      if (validResult.result) {
-        this.$toast.add({
-          severity: "success",
-          summary: "Все прошло успешно",
-          detail: "Данные отправлены",
-          life: 3000,
-        });
-      } else {
-        this.$toast.add({
-          severity: "error",
-          summary: "Ошибка",
-          detail: validResult.error,
-          life: 3000,
-        });
-      }
-    },
-
-    showRule(event: object) {
-      this.$refs.inputRules.toggle(event);
-    },
-
-    hideRule(event: object) {
-      if (this.$refs.inputRules) {
-        this.$refs.inputRules.hide(event);
-      } else {
-        return;
-      }
-    },
-  },
-});
+const toast = useToast();
+const login = ref(null);
+const password = ref(null);
 </script>
 
 <style lang="scss" scoped>
@@ -155,11 +105,6 @@ export default defineComponent({
   transition: 300ms ease-in-out;
   padding: 20px;
   backdrop-filter: blur(300px);
-
-  button {
-    max-width: 100%;
-    min-width: 100%;
-  }
 
   .placeForm {
     display: flex;
