@@ -1,6 +1,6 @@
 <template>
   <button @click.prevent="changeTheme">
-    <img :src="src" alt="theme-icon" />
+    <img :src="src" alt="icon Theme" ref="iconTheme" />
   </button>
 </template>
 
@@ -13,9 +13,9 @@ export default defineComponent({
 
   data() {
     return {
-      src: require(`@/assets/icons/light-theme.svg`),
-      darkIcon: require(`@/assets/icons/dark-theme.svg`),
-      lightIcon: require(`@/assets/icons/light-theme.svg`),
+      src: require("@/assets/icons/sun.svg"),
+      darkIcon: require("@/assets/icons/moon.svg"),
+      lightIcon: require("@/assets/icons/sun.svg"),
     };
   },
 
@@ -48,6 +48,7 @@ export default defineComponent({
   watch: {
     "$store.state.theme.dark": function () {
       this.changeThemeOfPrimeVue(this.$store.state.theme.dark);
+
       switch (this.$store.state.theme.dark) {
         case true:
           this.src = this.lightIcon;
@@ -75,5 +76,6 @@ button {
   background: none;
   outline: none;
   border: none;
+  width: fit-content;
 }
 </style>

@@ -1,6 +1,8 @@
 <template>
   <div class="loadingScreen">
-    <ProgressSpinner />
+    <div class="flex items-center justify-center h-screen">
+      <ProgressSpinner />
+    </div>
   </div>
 </template>
 
@@ -15,10 +17,10 @@ export default defineComponent({
 <style lang="scss">
 .loadingScreen {
   background-color: #001122;
-  display: flex;
-  width: 100svw;
-  height: 100svh;
+  position: fixed;
+  inset: 0 0 0 0;
   justify-content: center;
   align-items: center;
+  z-index: 9999999;
 }
 </style>

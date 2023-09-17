@@ -1,19 +1,20 @@
 <template>
-  <LoadingScreen v-if="isLoading"></LoadingScreen>
-
-  <router-view v-slot="{ Component }" v-if="!isLoading">
+  <router-view v-slot="{ Component }">
+    <component :is="Component" />
     <transition name="loadingScreen" appear>
-      <component :is="Component" />
+      <LoadingScreen v-if="store.state.isLoading"></LoadingScreen>
     </transition>
   </router-view>
+
+  <p v-if="false">Govno</p>
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from "vue";
+import { onMounted } from "vue";
+import { useStore } from "vuex";
 
-const isLoading = ref(true);
-
-onMounted(() => setTimeout(() => (isLoading.value = !isLoading.value), 1000));
+const store = useStore();
+onMounted(() => setTimeout(() => store.commit(`lodingEnd`), 1500));
 </script>
 
 <style lang="scss">
@@ -30,17 +31,11 @@ html {
   margin: 0;
   overflow: hidden;
 }
-
-.loadingScreen-enter-active {
-  transition: opacity 1.2s linear;
-}
+.loadingScreen-enter-active,
 .loadingScreen-leave-active {
-  transition: opacity 10s linear;
+  transition: opacity 1s linear;
 }
 .loadingScreen-enter-from {
-  opacity: 0;
-}
-.loadingScreen-enter-to {
   opacity: 1;
 }
 .loadingScreen-leave-from {
