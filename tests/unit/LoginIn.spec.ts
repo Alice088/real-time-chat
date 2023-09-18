@@ -1,6 +1,6 @@
 import { expect } from "chai";
 
-function ValidationPassword(inputText: string): boolean {
+function ValidationText(inputText: string): boolean {
   const isInvalidInputText = !inputText || inputText.toString().length > 20;
 
   return !isInvalidInputText;
@@ -33,7 +33,7 @@ function makeLogin() {
 describe("check form password", () => {
   it("Get password and checking it", () => {
     for (let i = 0; i < 500; i++) {
-      expect(ValidationPassword(makePassword())).equal(true);
+      expect(ValidationText(makePassword())).equal(true);
     }
   });
 });
@@ -41,7 +41,7 @@ describe("check form password", () => {
 describe("check form login", () => {
   it("Get login and checking it", () => {
     for (let i = 0; i < 500; i++) {
-      expect(ValidationPassword(makeLogin())).equal(true);
+      expect(ValidationText(makeLogin())).equal(true);
     }
   });
 });
