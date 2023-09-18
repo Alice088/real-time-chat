@@ -1,12 +1,11 @@
 <template>
   <router-view v-slot="{ Component }">
     <component :is="Component" />
-    <transition name="loadingScreen" appear>
-      <LoadingScreen v-if="store.state.isLoading"></LoadingScreen>
-    </transition>
   </router-view>
 
-  <p v-if="false">Govno</p>
+  <transition name="loadingScreen" appear>
+    <LoadingScreen v-if="store.state.isLoading"></LoadingScreen>
+  </transition>
 </template>
 
 <script lang="ts" setup>
