@@ -29,12 +29,8 @@ const objectOfSrc = reactive({
 
 function changeThemeOfPrimeVue(isDark: boolean): void {
   isDark
-    ? PrimeVue.changeTheme("soho-light", "soho-dark", "theme-link", () => {
-        return;
-      })
-    : PrimeVue.changeTheme("soho-dark", "soho-light", "theme-link", () => {
-        return;
-      });
+    ? PrimeVue.changeTheme("soho-light", "soho-dark", "theme-link")
+    : PrimeVue.changeTheme("soho-dark", "soho-light", "theme-link");
 }
 
 watch(
