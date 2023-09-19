@@ -1,67 +1,69 @@
 <template>
-  <button @click.prevent="changeTheme">
-    <img :src="src" alt="icon Theme" />
+  <button @click.prevent="Store.commit(`theme/changeTheme`)">
+    <img :src="objectOfSrc.src" alt="icon Theme" />
   </button>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { mapMutations } from "vuex";
 
 export default defineComponent({
-  name: `ThemeButton`,
-
-  data() {
-    return {
-      src: require("@/assets/icons/sun.svg"),
-      darkIcon: require("@/assets/icons/moon.svg"),
-      lightIcon: require("@/assets/icons/sun.svg"),
-    };
-  },
-
-  methods: {
-    ...mapMutations({
-      changeTheme: `theme/changeTheme`,
-    }),
-
-    changeThemeOfPrimeVue(state: { dark: boolean }): void {
-      if (state) {
-        this.$primevue.changeTheme(
-          "soho-light",
-          "soho-dark",
-          "theme-link",
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          () => {}
-        );
-      } else {
-        this.$primevue.changeTheme(
-          "soho-dark",
-          "soho-light",
-          "theme-link",
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          () => {}
-        );
-      }
-    },
-  },
-
-  watch: {
-    "$store.state.theme.dark": function () {
-      this.changeThemeOfPrimeVue(this.$store.state.theme.dark);
-
-      switch (this.$store.state.theme.dark) {
-        case true:
-          this.src = this.lightIcon;
-          break;
-
-        case false:
-          this.src = this.darkIcon;
-          break;
-      }
-    },
-  },
+  name: "ThemeButton",
+  inheritAttrs: false,
 });
 </script>
+
+<script lang="ts" setup>
+import { reactive, watch } from "vue";
+import { useStore } from "vuex";
+import { usePrimeVue } from "primevue/config";
+
+const PrimeVue = usePrimeVue();
+const Store = useStore();
+
+const objectOfSrc = reactive({
+  src: require("@/assets/icons/sun.svg"),
+  darkIcon: require("@/assets/icons/moon.svg"),
+  lightIcon: require("@/assets/icons/sun.svg"),
+});
+
+function changeThemeOfPrimeVue(isDark: boolean): void {
+  if (isDark) {
+    PrimeVue.changeTheme(
+      "soho-light",
+      "soho-dark",
+      "theme-link",
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      () => {}
+    );
+  } else {
+    PrimeVue.changeTheme(
+      "soho-dark",
+      "soho-light",
+      "theme-link",
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      () => {}
+    );
+  }
+}
+watch(
+  () => Store.state.theme.dark,
+  (isDark: boolean): void => {
+    changeThemeOfPrimeVue(isDark);
+
+    switch (isDark) {
+      case true:
+        objectOfSrc.src = objectOfSrc.lightIcon;
+        break;
+
+      case false:
+        objectOfSrc.src = objectOfSrc.darkIcon;
+        break;
+    }
+  }
+);
+</script>
+
 <style lang="scss" scoped>
 img {
   max-width: 50px;
