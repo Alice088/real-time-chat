@@ -28,38 +28,23 @@ const objectOfSrc = reactive({
 });
 
 function changeThemeOfPrimeVue(isDark: boolean): void {
-  if (isDark) {
-    PrimeVue.changeTheme(
-      "soho-light",
-      "soho-dark",
-      "theme-link",
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      () => {}
-    );
-  } else {
-    PrimeVue.changeTheme(
-      "soho-dark",
-      "soho-light",
-      "theme-link",
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      () => {}
-    );
-  }
+  isDark
+    ? PrimeVue.changeTheme("soho-light", "soho-dark", "theme-link", () => {
+        return;
+      })
+    : PrimeVue.changeTheme("soho-dark", "soho-light", "theme-link", () => {
+        return;
+      });
 }
+
 watch(
   () => Store.state.theme.dark,
   (isDark: boolean): void => {
     changeThemeOfPrimeVue(isDark);
 
-    switch (isDark) {
-      case true:
-        objectOfSrc.src = objectOfSrc.lightIcon;
-        break;
-
-      case false:
-        objectOfSrc.src = objectOfSrc.darkIcon;
-        break;
-    }
+    isDark
+      ? (objectOfSrc.src = objectOfSrc.lightIcon)
+      : (objectOfSrc.src = objectOfSrc.darkIcon);
   }
 );
 </script>
