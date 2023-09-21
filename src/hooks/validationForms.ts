@@ -1,16 +1,25 @@
+import { typeLogin, typePassword } from "@/types/TypeFormsInput";
+import { typeValidFormOject } from "@/types/TypeValidFormOject";
+
 export default function useValidationPost(
-  login: string | null,
-  password: string | number | null
-): { result: boolean; error: string | null } {
+  login: typeLogin,
+  password: typePassword
+): typeValidFormOject {
   const isInvalidLogin = !login || login.length > 20;
   const isInvalidPassword = !password || password.toString().length > 20;
 
   return {
     result: !(isInvalidLogin || isInvalidPassword),
     error: isInvalidLogin
-      ? "Логин имеет символов больше чем 20 или пуст"
+      ? {
+          text: "Логин имеет символов больше чем 20 или пуст",
+          at: "login",
+        }
       : isInvalidPassword
-      ? "Пароль имеет символов больше чем 20 или пуст"
+      ? {
+          text: "Пароль имеет символов больше чем 20 или пуст",
+          at: "password",
+        }
       : null,
   };
 }

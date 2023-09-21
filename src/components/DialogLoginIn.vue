@@ -30,9 +30,11 @@
           autofocus
           :pt="{
             root: {
-              class: `w-full text-center border-[2px] focus:outline`,
+              class: `w-full text-center
+        border-[2px] focus:outline`,
             },
           }"
+          :class="{ 'p-invalid': !isValidLogin }"
         />
       </span>
 
@@ -43,12 +45,13 @@
         weakLabel="Простой"
         mediumLabel="средний"
         strongLabel="Хороший"
+        toggleMask
         :pt="{
           input: {
             class: `w-full text-center border-[2px]`,
           },
         }"
-        toggleMask
+        :class="{ 'p-invalid': !isValidPassword }"
       >
         <template #footer>
           <div class="border-t-[1px] border-solid border-gray-700 mt-5 pt-5">
@@ -63,7 +66,7 @@
       </Password>
 
       <Button
-        @click.prevent="showToastMessage(login, password, toast)"
+        @click.prevent="sendForm(login, password, toast)"
         icon="pi pi-send"
         iconPos="right"
         label="Отправить"
@@ -76,10 +79,38 @@
 import showToastMessage from "@/hooks/showToastMessage";
 import { ref } from "vue";
 import { useToast } from "primevue/usetoast";
+import { typeLogin, typePassword } from "@/types/TypeFormsInput";
+import { ToastServiceMethods } from "primevue/toastservice";
+import { typeValidFormOject } from "@/types/TypeValidFormOject";
 
 const toast = useToast();
-const login = ref(null);
-const password = ref(null);
+
+const login = ref(``);
+const isValidLogin = ref(true);
+
+const password = ref(``);
+const isValidPassword = ref(true);
+
+function sendForm(
+  login: typeLogin,
+  password: typePassword,
+  toast: ToastServiceMethods
+): void {
+  isInvalidInput(showToastMessage(login, password, toast));
+}
+
+const isInvalidInput = (result: typeValidFormOject): void => {
+  result.result
+    ? ((password.value = ``), (login.value = ``))
+    : result.error.at === "password"
+    ? (isValidPassword.value = !isValidPassword.value)
+    : (isValidLogin.value = !isValidLogin.value);
+
+  setTimeout(() => {
+    isValidPassword.value = true;
+    isValidLogin.value = true;
+  }, 2000);
+};
 </script>
 
 <style lang="scss" scoped>

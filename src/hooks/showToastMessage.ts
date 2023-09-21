@@ -1,11 +1,13 @@
 import useValidationPost from "./validationForms";
 import { ToastServiceMethods } from "primevue/toastservice";
+import { typeLogin, typePassword } from "@/types/TypeFormsInput";
+import { typeValidFormOject } from "@/types/TypeValidFormOject";
 
 const showToastMessage = (
-  login: string | null,
-  password: string | number | null,
+  login: typeLogin,
+  password: typePassword,
   toast: ToastServiceMethods
-): void => {
+): typeValidFormOject => {
   const validResult = useValidationPost(login, password);
 
   validResult.result
@@ -18,9 +20,11 @@ const showToastMessage = (
     : toast.add({
         severity: "error",
         summary: "Ошибка",
-        detail: validResult.error,
+        detail: validResult.error.text,
         life: 3000,
       });
+
+  return validResult;
 };
 
 export default showToastMessage;
