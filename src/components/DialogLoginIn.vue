@@ -18,27 +18,23 @@
     ]"
     v-on="$attrs"
   >
-    <ThemeButton class="themeButton focus: outline-green-950" />
+    <ThemeButton class="themeButton" />
 
     <div class="placeForm">
       <span class="p-input-icon-right">
         <i class="pi pi-user" />
         <InputText
+          class="w-full text-center border-[2px] focus:outline"
           aria-describedby="loginInput"
           v-model="login"
           placeholder="Логин"
           autofocus
-          :pt="{
-            root: {
-              class: `w-full text-center
-        border-[2px] focus:outline`,
-            },
-          }"
           :class="{ 'p-invalid': !isValidLogin }"
         />
       </span>
 
       <Password
+        class="[&_input]:w-full [&_input]:text-center"
         v-model="password"
         placeholder="Пароль"
         promptLabel="Придумайте пароль"
@@ -46,11 +42,6 @@
         mediumLabel="средний"
         strongLabel="Хороший"
         toggleMask
-        :pt="{
-          input: {
-            class: `w-full text-center border-[2px]`,
-          },
-        }"
         :class="{ 'p-invalid': !isValidPassword }"
       >
         <template #footer>
@@ -130,13 +121,11 @@ const isInvalidInput = (result: typeValidFormOject): void => {
 .dialog {
   display: grid;
   grid-template-rows: max-content 50% 50%;
-  max-width: 100%;
-  min-width: 100%;
-  max-height: 100%;
-  min-height: 100%;
+  width: 100%;
+  height: 110%;
   transition: 300ms ease-in-out;
   padding: 20px;
-  backdrop-filter: blur(300px);
+  backdrop-filter: blur(9px);
 
   .placeForm {
     display: flex;
@@ -152,12 +141,12 @@ const isInvalidInput = (result: typeValidFormOject): void => {
 }
 
 .darkThemeDialog {
-  background-color: #001122be;
+  background-color: rgba(0, 18, 36, 0.69);
   border-left: 1px rgba(255, 255, 255, 0.08) solid;
 }
 
 .lightThemeDialog {
-  background-color: #ffffff1c;
+  background-color: rgba(255, 255, 255, 0.69);
   border-left: 1px rgba(0, 0, 0, 0.26) solid;
 }
 </style>

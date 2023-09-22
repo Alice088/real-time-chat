@@ -6,6 +6,7 @@ import ProgressSpinner from "primevue/progressspinner";
 import Password from "primevue/password";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
+import UserBar from "@/components/UserBar.vue";
 
 const components: Component[] = [
   Button,
@@ -15,6 +16,7 @@ const components: Component[] = [
   ProgressSpinner,
   Password,
   InputText,
+  UserBar,
 ];
 
 export default components;
