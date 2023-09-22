@@ -40,7 +40,7 @@
 }
 
 .inputChatTextLight {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
 }
 
 .inputChatTextDark {
