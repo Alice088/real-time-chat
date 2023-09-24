@@ -1,6 +1,8 @@
 <template>
   <router-view v-slot="{ Component }">
-    <component :is="Component" />
+    <Transition name="transitionPage" mode="out-in" appear>
+      <component :is="Component" />
+    </Transition>
   </router-view>
 
   <transition name="loadingScreen" appear>
@@ -13,7 +15,7 @@ import { onMounted } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
-onMounted(() => setTimeout(() => store.commit(`lodingEnd`), 1500));
+onMounted(() => setTimeout(() => store.commit(`isLoding`), 1500));
 </script>
 
 <style lang="scss">
@@ -30,17 +32,34 @@ html {
   margin: 0;
   overflow: hidden;
 }
+
 .loadingScreen-enter-active,
 .loadingScreen-leave-active {
-  transition: opacity 1s linear;
+  transition: opacity 1s ease-in-out;
 }
-.loadingScreen-enter-from {
-  opacity: 1;
-}
+.loadingScreen-enter-from,
 .loadingScreen-leave-from {
   opacity: 1;
 }
+
 .loadingScreen-leave-to {
   opacity: 0;
+}
+
+///=============================
+
+.transitionPage-enter-active,
+.transitionPage-leave-active {
+  transition: 1s opacity;
+}
+
+.transitionPage-enter-from,
+.transitionPage-leave-to {
+  opacity: 0;
+}
+
+.transitionPage-enter-to,
+.transitionPage-leave-from {
+  opacity: 1;
 }
 </style>

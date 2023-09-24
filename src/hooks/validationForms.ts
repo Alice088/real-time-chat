@@ -5,17 +5,19 @@ export default function useValidationPost(
   login: typeLogin,
   password: typePassword
 ): typeValidFormOject {
-  const isInvalidLogin = !login || login.length > 20;
-  const isInvalidPassword = !password || password.toString().length > 20;
+  // eslint-disable-next-line prettier/prettier
+  const isInvalidLogin = login && !(login.length > 20) && !(login.length < 10) || false;
+  // eslint-disable-next-line prettier/prettier
+  const isInvalidPassword = password && !(password.toString().length > 20) && !(password.toString().length < 10) || false;
 
   return {
-    result: !(isInvalidLogin || isInvalidPassword),
-    error: isInvalidLogin
+    result: isInvalidLogin && isInvalidPassword,
+    error: !isInvalidLogin
       ? {
           text: "Логин имеет символов больше чем 20 или пуст",
           at: "login",
         }
-      : isInvalidPassword
+      : !isInvalidPassword
       ? {
           text: "Пароль имеет символов больше чем 20 или пуст",
           at: "password",

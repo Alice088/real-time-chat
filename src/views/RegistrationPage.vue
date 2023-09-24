@@ -12,16 +12,7 @@
   </div>
 </template>
 
-<script lang="ts">
-import DialogLoginIn from "@/components/DialogLoginIn.vue";
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  components: {
-    DialogLoginIn,
-  },
-});
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss" scoped>
 .registration {

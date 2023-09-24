@@ -1,15 +1,16 @@
 import { expect } from "chai";
 
 function ValidationText(inputText: string): boolean {
-  const isInvalidInputText = !inputText || inputText.toString().length > 20;
+  // eslint-disable-next-line prettier/prettier
+  const isInvalidLogin = inputText && !(inputText.toString().length > 20) && !(inputText.toString().length < 10) || false;
 
-  return !isInvalidInputText;
+  return isInvalidLogin;
 }
 
 function makePassword() {
   let text = ``;
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 2; i++) {
     text += `${String.fromCodePoint(
       Math.floor(Math.random() * (220 - 20) + 50)
     )}`;
@@ -22,7 +23,7 @@ function makePassword() {
 function makeLogin() {
   let text = ``;
 
-  for (let i = 0; i < 20; i++) {
+  for (let i = 0; i < 2; i++) {
     text += `${String.fromCodePoint(
       Math.floor(Math.random() * (220 - 20) + 50)
     )}`;
@@ -33,15 +34,17 @@ function makeLogin() {
 describe("check form password", () => {
   it("Get password and checking it", () => {
     for (let i = 0; i < 500; i++) {
-      expect(ValidationText(makePassword())).equal(true);
+      expect(ValidationText(makePassword())).equal(false);
     }
   });
+  after(() => console.log(`good`));
 });
 
 describe("check form login", () => {
   it("Get login and checking it", () => {
     for (let i = 0; i < 500; i++) {
-      expect(ValidationText(makeLogin())).equal(true);
+      expect(ValidationText(makeLogin())).equal(false);
     }
   });
+  after(() => console.log(`good`));
 });

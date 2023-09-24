@@ -7,6 +7,7 @@ import Password from "primevue/password";
 import InputText from "primevue/inputtext";
 import Button from "primevue/button";
 import UserBar from "@/components/UserBar.vue";
+import DialogLoginIn from "@/components/DialogLoginIn.vue";
 
 const components: Component[] = [
   Button,
@@ -17,6 +18,7 @@ const components: Component[] = [
   Password,
   InputText,
   UserBar,
+  DialogLoginIn,
 ];
 
 export default components;

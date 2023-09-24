@@ -12,7 +12,7 @@ export default createStore({
   },
 
   mutations: {
-    lodingEnd(state: { isLoading: boolean }): void {
+    isLoding(state: { isLoading: boolean }): void {
       state.isLoading = !state.isLoading;
     },
   },
