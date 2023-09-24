@@ -50,7 +50,7 @@ html {
 
 .transitionPage-enter-active,
 .transitionPage-leave-active {
-  transition: 1s opacity;
+  transition: 0.5s opacity ease-in-out;
 }
 
 .transitionPage-enter-from,

@@ -1,26 +1,34 @@
-import { typeLogin, typePassword } from "@/types/TypeFormsInput";
+import { typeInput } from "@/types/TypeFormsInput";
 import { typeValidFormOject } from "@/types/TypeValidFormOject";
 
-export default function useValidationPost(
-  login: typeLogin,
-  password: typePassword
+function validation(inputValue: typeInput, name: string) {
+  return !inputValue
+    ? { result: false, message: "Поле пустое", at: name }
+    : inputValue.length > 20
+    ? { result: false, message: "Символов больше 20", at: name }
+    : inputValue.length < 10
+    ? { result: false, message: "Символов меньше 10", at: name }
+    : { result: true, message: null, at: name };
+}
+
+export function useValidationPost(
+  login: typeInput,
+  password: typeInput
 ): typeValidFormOject {
-  // eslint-disable-next-line prettier/prettier
-  const isInvalidLogin = login && !(login.length > 20) && !(login.length < 10) || false;
-  // eslint-disable-next-line prettier/prettier
-  const isInvalidPassword = password && !(password.toString().length > 20) && !(password.toString().length < 10) || false;
+  const isInvalidLogin = validation(login, `login`);
+  const isInvalidPassword = validation(password, `password`);
 
   return {
-    result: isInvalidLogin && isInvalidPassword,
-    error: !isInvalidLogin
+    result: isInvalidLogin.result && isInvalidPassword.result,
+    error: !isInvalidLogin.result
       ? {
-          text: "Логин имеет символов больше чем 20 или пуст",
-          at: "login",
+          text: isInvalidLogin.message,
+          at: isInvalidLogin.at,
         }
-      : !isInvalidPassword
+      : !isInvalidPassword.result
       ? {
-          text: "Пароль имеет символов больше чем 20 или пуст",
-          at: "password",
+          text: isInvalidPassword.message,
+          at: isInvalidPassword.at,
         }
       : null,
   };

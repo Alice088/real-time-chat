@@ -1,5 +1,3 @@
-type typePassword = string | number | null;
+type typeInput = string | null;
 
-type typeLogin = string | null;
-
-export { typeLogin, typePassword };
+export { typeInput };

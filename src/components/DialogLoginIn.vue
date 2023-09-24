@@ -80,13 +80,11 @@ export default defineComponent({
 import showToastMessage from "@/hooks/showToastMessage";
 import { ref } from "vue";
 import { useToast } from "primevue/usetoast";
-import { typeLogin, typePassword } from "@/types/TypeFormsInput";
+import { typeInput } from "@/types/TypeFormsInput";
 import { ToastServiceMethods } from "primevue/toastservice";
 import { typeValidFormOject } from "@/types/TypeValidFormOject";
 import { useRouter } from "vue-router";
-import { useStore } from "vuex";
 
-const store = useStore();
 const router = useRouter();
 const toast = useToast();
 
@@ -97,24 +95,28 @@ const password = ref(``);
 const isValidPassword = ref(true);
 
 function sendForm(
-  login: typeLogin,
-  password: typePassword,
+  login: typeInput,
+  password: typeInput,
   toast: ToastServiceMethods
 ): void {
   isInvalidInput(showToastMessage(login, password, toast));
 }
 
 const isInvalidInput = (result: typeValidFormOject): void => {
-  result.result // eslint-disable-next-line prettier/prettier
-    ? ((password.value = ``), (login.value = ``), setTimeout(() => router.push(`/home`), 1000))
-    : result.error.at === "password"
-    ? (isValidPassword.value = !isValidPassword.value)
-    : (isValidLogin.value = !isValidLogin.value);
-
-  setTimeout(() => {
-    isValidPassword.value = true;
-    isValidLogin.value = true;
-  }, 2000);
+  try {
+    result.result // eslint-disable-next-line prettier/prettier
+    ? ((password.value = ``), (login.value = ``), setTimeout(() => router.push(`/home`), 900))
+      : result.error.at === "password"
+      ? (isValidPassword.value = !isValidPassword.value)
+      : (isValidLogin.value = !isValidLogin.value);
+  } catch (e) {
+    alert(`непредвиденная ошибка, тип: ${e.message}`);
+  } finally {
+    setTimeout(() => {
+      isValidPassword.value = true;
+      isValidLogin.value = true;
+    }, 2000);
+  }
 };
 </script>
 

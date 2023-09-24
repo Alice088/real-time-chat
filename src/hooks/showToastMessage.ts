@@ -1,11 +1,11 @@
-import useValidationPost from "./validationForms";
+import { useValidationPost } from "./validationForms";
 import { ToastServiceMethods } from "primevue/toastservice";
-import { typeLogin, typePassword } from "@/types/TypeFormsInput";
+import { typeInput } from "@/types/TypeFormsInput";
 import { typeValidFormOject } from "@/types/TypeValidFormOject";
 
 const showToastMessage = (
-  login: typeLogin,
-  password: typePassword,
+  login: typeInput,
+  password: typeInput,
   toast: ToastServiceMethods
 ): typeValidFormOject => {
   const validResult = useValidationPost(login, password);
