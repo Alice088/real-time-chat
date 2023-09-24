@@ -10,20 +10,26 @@ const showToastMessage = (
 ): typeValidFormOject => {
   const validResult = useValidationPost(login, password);
 
-  validResult.result
-    ? toast.add({
-        severity: "success",
-        summary: "Все прошло успешно",
-        detail: "Данные отправлены",
-        life: 3000,
-      })
-    : toast.add({
-        severity: "error",
-        summary: "Ошибка",
-        detail: validResult.error.text,
-        life: 3000,
-      });
-
+  try {
+    validResult.result
+      ? toast.add({
+          severity: "success",
+          summary: "Все прошло успешно",
+          detail: "Данные отправлены",
+          life: 3000,
+        })
+      : toast.add({
+          severity: "error",
+          summary: "Ошибка",
+          detail: validResult.error.text,
+          life: 3000,
+        });
+  } catch (error) {
+    alert(
+      `непредвиденная ошибка, тип: ${error.message}, пожалуйста не паникуйте`
+    );
+    throw error;
+  }
   return validResult;
 };
 

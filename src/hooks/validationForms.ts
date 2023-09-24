@@ -18,18 +18,25 @@ export function useValidationPost(
   const isInvalidLogin = validation(login, `login`);
   const isInvalidPassword = validation(password, `password`);
 
-  return {
-    result: isInvalidLogin.result && isInvalidPassword.result,
-    error: !isInvalidLogin.result
-      ? {
-          text: isInvalidLogin.message,
-          at: isInvalidLogin.at,
-        }
-      : !isInvalidPassword.result
-      ? {
-          text: isInvalidPassword.message,
-          at: isInvalidPassword.at,
-        }
-      : null,
-  };
+  try {
+    return {
+      result: isInvalidLogin.result && isInvalidPassword.result,
+      error: !isInvalidLogin.result
+        ? {
+            text: isInvalidLogin.message,
+            at: isInvalidLogin.at,
+          }
+        : !isInvalidPassword.result
+        ? {
+            text: isInvalidPassword.message,
+            at: isInvalidPassword.at,
+          }
+        : null,
+    };
+  } catch (error) {
+    alert(
+      `непредвиденная ошибка, тип: ${error.message}, пожалуйста не паникуйте`
+    );
+    throw error;
+  }
 }

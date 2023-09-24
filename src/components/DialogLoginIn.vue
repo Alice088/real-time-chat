@@ -109,8 +109,11 @@ const isInvalidInput = (result: typeValidFormOject): void => {
       : result.error.at === "password"
       ? (isValidPassword.value = !isValidPassword.value)
       : (isValidLogin.value = !isValidLogin.value);
-  } catch (e) {
-    alert(`непредвиденная ошибка, тип: ${e.message}`);
+  } catch (error) {
+    alert(
+      `непредвиденная ошибка, тип: ${error.message}, пожалуйста не паникуйте`
+    );
+    throw error;
   } finally {
     setTimeout(() => {
       isValidPassword.value = true;
@@ -136,12 +139,12 @@ const isInvalidInput = (result: typeValidFormOject): void => {
 }
 .dialog {
   display: grid;
-  grid-template-rows: max-content 50% 50%;
+  grid-template-rows: max-content 55% 45%;
   width: 100%;
-  height: 110%;
+  height: 100svh;
   transition: 300ms ease-in-out;
   padding: 20px;
-  backdrop-filter: blur(9px);
+  backdrop-filter: blur(109px);
 
   .placeForm {
     display: flex;
@@ -157,12 +160,12 @@ const isInvalidInput = (result: typeValidFormOject): void => {
 }
 
 .darkThemeDialog {
-  background-color: rgba(0, 18, 36, 0.69);
+  background-color: rgba(0, 18, 36, 0);
   border-left: 1px rgba(255, 255, 255, 0.08) solid;
 }
 
 .lightThemeDialog {
-  background-color: rgba(255, 255, 255, 0.69);
+  background-color: rgba(255, 255, 255, 0);
   border-left: 1px rgba(0, 0, 0, 0.26) solid;
 }
 </style>
