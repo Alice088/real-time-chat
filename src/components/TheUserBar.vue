@@ -12,8 +12,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "UserBar",
-  inheritAttrs: false,
+  name: "TheUserBar",
 });
 </script>
 

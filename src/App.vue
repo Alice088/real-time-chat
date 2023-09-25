@@ -6,7 +6,7 @@
   </router-view>
 
   <transition name="loadingScreen" appear>
-    <LoadingScreen v-if="store.state.isLoading"></LoadingScreen>
+    <TheLoadingScreen v-if="store.state.isLoading" />
   </transition>
 </template>
 

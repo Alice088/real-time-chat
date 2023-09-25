@@ -8,8 +8,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "ThemeButton",
-  inheritAttrs: false,
+  name: "TheChangeThemeButton",
 });
 </script>
 

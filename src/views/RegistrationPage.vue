@@ -7,7 +7,7 @@
     ]"
   >
     <div class="dialogLoginIn">
-      <DialogLoginIn />
+      <TheDialogLoginIn />
     </div>
   </div>
 </template>

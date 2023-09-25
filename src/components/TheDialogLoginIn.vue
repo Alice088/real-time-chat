@@ -18,51 +18,24 @@
     ]"
     v-on="$attrs"
   >
-    <ThemeButton class="themeButton" />
+    <TheChangeThemeButton />
 
     <div class="placeForm">
-      <span class="p-input-icon-right">
-        <i class="pi pi-user" />
-        <InputText
-          class="w-full text-center border-[2px] focus:outline"
-          aria-describedby="loginInput"
-          v-model="login"
-          placeholder="Логин"
-          autofocus
-          :class="{ 'p-invalid': !isValidLogin }"
-        />
-      </span>
-
-      <Password
-        class="[&_input]:w-full [&_input]:text-center"
-        v-model="password"
-        placeholder="Пароль"
-        promptLabel="Придумайте пароль"
-        weakLabel="Простой"
-        mediumLabel="средний"
-        strongLabel="Хороший"
-        toggleMask
-        :class="{ 'p-invalid': !isValidPassword }"
-      >
-        <template #footer>
-          <div class="border-t-[1px] border-solid border-gray-700 mt-5 pt-5">
-            <strong>Правила ввода:</strong>
-
-            <ul class="rulesList [&_li]:font-bold justify-center">
-              <li>не больше 20 символов</li>
-              <li>не должен быть пустой</li>
-              <li>не должен быть меньше 10 символов</li>
-            </ul>
-          </div>
-        </template>
-      </Password>
-
-      <Button
-        @click.prevent="sendForm(login, password, toast)"
-        icon="pi pi-send"
-        iconPos="right"
-        label="Отправить"
+      <TheLoginInput
+        :isValidLogin="isValidLogin"
+        :login="login"
+        @changeLogin="login = $event"
+        @changeIsValidLogin="isValidLogin = $event"
       />
+
+      <ThePasswordInput
+        :isValidPassword="isValidPassword"
+        :password="password"
+        @changePassword="password = $event"
+        @changeIsValidPassword="isValidPassword = $event"
+      />
+
+      <TheButton @click.prevent="sendForm(login, password, toast)" />
     </div>
   </form>
 </template>
@@ -71,8 +44,7 @@
 import { defineComponent } from "vue";
 
 export default defineComponent({
-  name: "DialogLoginIn",
-  inheritAttrs: false,
+  name: "TheDialogLoginIn",
 });
 </script>
 
@@ -107,8 +79,8 @@ const isInvalidInput = (result: typeValidFormOject): void => {
     result.result // eslint-disable-next-line prettier/prettier
     ? ((password.value = ``), (login.value = ``), setTimeout(() => router.push(`/home`), 900))
       : result.error.at === "password"
-      ? (isValidPassword.value = !isValidPassword.value)
-      : (isValidLogin.value = !isValidLogin.value);
+      ? (isValidPassword.value = false)
+      : (isValidLogin.value = false);
   } catch (error) {
     alert(
       `непредвиденная ошибка, тип: ${error.message}, пожалуйста не паникуйте`
@@ -124,19 +96,6 @@ const isInvalidInput = (result: typeValidFormOject): void => {
 </script>
 
 <style lang="scss" scoped>
-.rulesList {
-  display: flex;
-  flex-direction: column;
-
-  li {
-    margin-top: 10px;
-  }
-
-  li:before {
-    content: "● ";
-    color: grey;
-  }
-}
 .dialog {
   display: grid;
   grid-template-rows: max-content 55% 45%;
@@ -151,11 +110,6 @@ const isInvalidInput = (result: typeValidFormOject): void => {
     flex-direction: column;
     justify-content: end;
     gap: 20px;
-  }
-
-  .themeButton {
-    display: flex;
-    align-items: start;
   }
 }
 

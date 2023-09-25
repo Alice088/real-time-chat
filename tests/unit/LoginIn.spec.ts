@@ -7,10 +7,10 @@ function ValidationText(inputText: string): boolean {
   return isInvalidLogin;
 }
 
-function makePassword() {
+function makeInputText() {
   let text = ``;
 
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 20; i++) {
     text += `${String.fromCodePoint(
       Math.floor(Math.random() * (220 - 20) + 50)
     )}`;
@@ -20,21 +20,10 @@ function makePassword() {
   return text.slice(0, 20);
 }
 
-function makeLogin() {
-  let text = ``;
-
-  for (let i = 0; i < 2; i++) {
-    text += `${String.fromCodePoint(
-      Math.floor(Math.random() * (220 - 20) + 50)
-    )}`;
-  }
-  return text;
-}
-
 describe("check form password", () => {
   it("Get password and checking it", () => {
     for (let i = 0; i < 500; i++) {
-      expect(ValidationText(makePassword())).equal(false);
+      expect(ValidationText(makeInputText())).equal(true);
     }
   });
   after(() => console.log(`good`));
@@ -43,7 +32,7 @@ describe("check form password", () => {
 describe("check form login", () => {
   it("Get login and checking it", () => {
     for (let i = 0; i < 500; i++) {
-      expect(ValidationText(makeLogin())).equal(false);
+      expect(ValidationText(makeInputText())).equal(true);
     }
   });
   after(() => console.log(`good`));

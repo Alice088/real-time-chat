@@ -1,24 +1,34 @@
 import { Component } from "vue";
-import ChangeThemeButton from "@/components/UI/ChangeThemeButton.vue";
-import LoadingScreenVue from "./LoadingScreen.vue";
+import TheChangeThemeButton from "@/components/UI/TheChangeThemeButton.vue";
+import TheLoadingScreenVue from "./TheLoadingScreen.vue";
 import Toast from "primevue/toast";
 import ProgressSpinner from "primevue/progressspinner";
 import Password from "primevue/password";
+import ThePasswordInput from "@/components/UI/ThePasswordInput.vue";
 import InputText from "primevue/inputtext";
+import TheLoginInput from "@/components/UI/TheLoginInput.vue";
 import Button from "primevue/button";
-import UserBar from "@/components/UserBar.vue";
-import DialogLoginIn from "@/components/DialogLoginIn.vue";
+import TheButton from "@/components/UI/TheButton.vue";
+import TheUserBar from "@/components/TheUserBar.vue";
+import TheDialogLoginIn from "@/components/TheDialogLoginIn.vue";
+import TheChatPanel from "@/components/TheChatsPanel.vue";
+import TheChat from "@/components/TheChat.vue";
 
 const components: Component[] = [
   Button,
-  ChangeThemeButton,
-  LoadingScreenVue,
+  TheButton,
+  TheChangeThemeButton,
+  TheLoadingScreenVue,
   Toast,
   ProgressSpinner,
   Password,
   InputText,
-  UserBar,
-  DialogLoginIn,
+  TheUserBar,
+  TheDialogLoginIn,
+  TheChatPanel,
+  TheChat,
+  ThePasswordInput,
+  TheLoginInput,
 ];
 
 export default components;
