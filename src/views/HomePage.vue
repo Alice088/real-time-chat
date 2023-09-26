@@ -1,5 +1,11 @@
 <template>
-  <div class="home">
+  <div
+    class="home"
+    :class="[
+      { homeLight: !$store.state.theme.dark },
+      { homeDark: $store.state.theme.dark },
+    ]"
+  >
     <TheChatsPanel />
     <TheChat />
   </div>
@@ -21,5 +27,17 @@
   .home__chatsPanel {
     grid-area: 1 / 1 / 2 / 2;
   }
+}
+
+.homeDark {
+  background-image: url("@/assets/backgroundForest-dark.jpg");
+  background-position: center;
+  background-size: cover;
+}
+
+.homeLight {
+  background-image: url("@/assets/background-light.jpg");
+  background-position: center;
+  background-size: cover;
 }
 </style>

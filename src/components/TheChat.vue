@@ -1,11 +1,5 @@
 <template>
-  <div
-    class="home__containerChat"
-    :class="[
-      { home__containerChatLight: !$store.state.theme.dark },
-      { home__containerChatDark: $store.state.theme.dark },
-    ]"
-  >
+  <div class="home__containerChat">
     <div class="home__chat">
       <TheUserBar />
 
@@ -15,6 +9,7 @@
           { inputChatTextLight: !$store.state.theme.dark },
           { inputChatTextDark: $store.state.theme.dark },
         ]"
+        placeholder="Пишите текст...."
       />
     </div>
   </div>
@@ -35,21 +30,16 @@ export default defineComponent({
 
 .inputChatTextLight {
   background-color: rgb(255, 255, 255);
+  background-color: #00000000;
+  backdrop-filter: blur(20px) brightness(90%);
+  border-top: 1px rgba(255, 255, 255, 0.08) solid;
+  color: white;
 }
 
 .inputChatTextDark {
-  background-color: #001122;
-}
-.home__containerChatDark {
-  background-image: url("@/assets/backgroundForest-dark.jpg");
-  background-position: center;
-  background-size: cover;
-}
-
-.home__containerChatLight {
-  background-image: url("@/assets/background-light.jpg");
-  background-position: center;
-  background-size: cover;
+  background-color: #00000000;
+  backdrop-filter: blur(20px) brightness(90%);
+  border-top: 1px rgba(255, 255, 255, 0.08) solid;
 }
 
 .home__chat {

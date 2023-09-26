@@ -1,6 +1,6 @@
 <template>
   <Password
-    class="[&_input]:w-full [&_input]:text-center"
+    class="[&_input]:w-full [&_input]:text-center [&_input]:border-[2px]"
     v-model.trim="password"
     placeholder="Пароль"
     promptLabel="Придумайте пароль"
@@ -11,7 +11,7 @@
     :class="{ 'p-invalid': !props.isValidPassword }"
   >
     <template #footer>
-      <div class="border-t-[1px] border-solid border-gray-700 mt-5 pt-5">
+      <div class="border-t-[2px] border-solid border-gray-700 mt-5 pt-5">
         <strong>Правила ввода:</strong>
 
         <ul class="rulesList [&_li]:font-bold justify-center">
@@ -41,19 +41,19 @@ const props = defineProps<{
 }>();
 
 const emits = defineEmits<{
-  (e: "changePassword", password: string): void;
-  (e: "changeIsValidPassword", isValidPassword: boolean): void;
+  (e: "update:password", password: string): void;
+  (e: "update:isValidPassword", isValidPassword: boolean): void;
 }>();
 
 const password = ref(props.password);
 const isValidPassword = ref(props.isValidPassword);
 
 watch(password, (newCount) => {
-  emits("changePassword", newCount);
+  emits("update:password", newCount);
 });
 
 watch(isValidPassword, (newCount) => {
-  emits("changeIsValidPassword", newCount);
+  emits("update:isValidPassword", newCount);
 });
 </script>
 

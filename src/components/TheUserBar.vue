@@ -1,11 +1,5 @@
 <template>
-  <div
-    class="h-16 w-full userBar"
-    :class="[
-      { userBarLight: !$store.state.theme.dark },
-      { userBarDark: $store.state.theme.dark },
-    ]"
-  ></div>
+  <div class="h-16 w-full userBar border-b-[2px] border-gray-50/5"></div>
 </template>
 
 <script lang="ts">
@@ -21,12 +15,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .userBar {
   transition: 150ms ease-in-out background-color;
-}
-.userBarLight {
-  background-color: white;
-}
-
-.userBarDark {
-  background-color: #001122;
+  background-color: rgba(255, 255, 255, 0);
+  backdrop-filter: blur(40px) brightness(90%);
 }
 </style>

@@ -8,31 +8,18 @@
     }"
   />
 
-  <form
-    action=""
-    method="post"
-    class="dialog"
-    :class="[
-      { lightThemeDialog: !$store.state.theme.dark },
-      { darkThemeDialog: $store.state.theme.dark },
-    ]"
-    v-on="$attrs"
-  >
+  <form action="" method="post" class="dialog" v-on="$attrs">
     <TheChangeThemeButton />
 
     <div class="placeForm">
       <TheLoginInput
-        :isValidLogin="isValidLogin"
-        :login="login"
-        @changeLogin="login = $event"
-        @changeIsValidLogin="isValidLogin = $event"
+        v-model:isValidLogin="isValidLogin"
+        v-model:login="login"
       />
 
       <ThePasswordInput
-        :isValidPassword="isValidPassword"
-        :password="password"
-        @changePassword="password = $event"
-        @changeIsValidPassword="isValidPassword = $event"
+        v-model:isValidPassword="isValidPassword"
+        v-model:password="password"
       />
 
       <TheButton @click.prevent="sendForm(login, password, toast)" />
@@ -104,6 +91,8 @@ const isInvalidInput = (result: typeValidFormOject): void => {
   transition: 300ms ease-in-out;
   padding: 20px;
   backdrop-filter: blur(109px);
+  background-color: rgba(0, 18, 36, 0);
+  border-left: 1px rgba(255, 255, 255, 0.081) solid;
 
   .placeForm {
     display: flex;
@@ -111,15 +100,5 @@ const isInvalidInput = (result: typeValidFormOject): void => {
     justify-content: end;
     gap: 20px;
   }
-}
-
-.darkThemeDialog {
-  background-color: rgba(0, 18, 36, 0);
-  border-left: 1px rgba(255, 255, 255, 0.08) solid;
-}
-
-.lightThemeDialog {
-  background-color: rgba(255, 255, 255, 0);
-  border-left: 1px rgba(0, 0, 0, 0.26) solid;
 }
 </style>

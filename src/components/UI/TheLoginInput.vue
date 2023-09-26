@@ -2,7 +2,7 @@
   <span class="p-input-icon-right">
     <i class="pi pi-user" />
     <InputText
-      class="w-full text-center border-[1px] focus:outline"
+      class="w-full text-center border-[2px]"
       aria-describedby="loginInput"
       v-model.trim="localLogin"
       placeholder="Логин"
@@ -29,8 +29,8 @@ const props = defineProps<{
 }>();
 
 const emits = defineEmits<{
-  (e: "changeLogin", login: string): void;
-  (e: "changeIsValidLogin", isValidLogin: boolean): void;
+  (e: "update:login", login: string): void;
+  (e: "update:isValidLogin", isValidLogin: boolean): void;
 }>();
 
 const localLogin = ref(props.login);
@@ -38,10 +38,10 @@ const localLogin = ref(props.login);
 const isValidLoginValue = ref(props.isValidLogin);
 
 watch(localLogin, (newValue) => {
-  emits("changeLogin", newValue);
+  emits("update:login", newValue);
 });
 
 watch(isValidLoginValue, (newValue) => {
-  emits("changeIsValidLogin", newValue);
+  emits("update:isValidLogin", newValue);
 });
 </script>
