@@ -1,5 +1,6 @@
 import { createStore } from "vuex";
 import StateOfTheme from "@/store/StateOfTheme";
+import { IRootState } from "@/types/IRootState";
 
 export default createStore({
   modules: {
@@ -8,12 +9,16 @@ export default createStore({
   state() {
     return {
       isLoading: true,
+      isAuthorized: false,
     };
   },
 
   mutations: {
-    isLoding(state: { isLoading: boolean }): void {
+    isLodingChange(state: IRootState): void {
       state.isLoading = !state.isLoading;
+    },
+    isAuthorizedChange(state: IRootState): void {
+      state.isAuthorized = true;
     },
   },
 });

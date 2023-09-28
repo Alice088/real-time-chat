@@ -43,6 +43,7 @@ import { typeInput } from "@/types/TypeFormsInput";
 import { ToastServiceMethods } from "primevue/toastservice";
 import { typeValidFormOject } from "@/types/TypeValidFormOject";
 import { useRouter } from "vue-router";
+import Store from "@/store/Store";
 
 const router = useRouter();
 const toast = useToast();
@@ -64,7 +65,7 @@ function sendForm(
 const isInvalidInput = (result: typeValidFormOject): void => {
   try {
     result.result // eslint-disable-next-line prettier/prettier
-    ? ((password.value = ``), (login.value = ``), setTimeout(() => router.push(`/home`), 900))
+    ? ((password.value = ``), (login.value = ``), setTimeout(() => router.push(`/home`), 900), Store.commit(`isAuthorizedChange`))
       : result.error.at === "password"
       ? (isValidPassword.value = false)
       : (isValidLogin.value = false);

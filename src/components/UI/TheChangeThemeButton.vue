@@ -13,15 +13,21 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { reactive, watch } from "vue";
+import { reactive, watch, onMounted } from "vue";
 import { useStore } from "vuex";
 import { usePrimeVue } from "primevue/config";
 
 const PrimeVue = usePrimeVue();
 const Store = useStore();
 
+onMounted(() => {
+  Store.state.theme.dark
+    ? (objectOfSrc.src = objectOfSrc.lightIcon)
+    : (objectOfSrc.src = objectOfSrc.darkIcon);
+});
+
 const objectOfSrc = reactive({
-  src: require("@/assets/icons/sun.svg"),
+  src: "",
   darkIcon: require("@/assets/icons/moon.svg"),
   lightIcon: require("@/assets/icons/sun.svg"),
 });
@@ -50,7 +56,6 @@ img {
   min-width: 50px;
   max-height: 50px;
   min-height: 50px;
-  filter: drop-shadow(0 0 5px black);
   margin: 10px;
 }
 

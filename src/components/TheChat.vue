@@ -2,14 +2,12 @@
   <div class="home__containerChat">
     <div class="home__chat">
       <TheUserBar />
-
+      <div></div>
       <InputText
         class="inputChatText focus:border-none border-none h-14 rounded-none"
-        :class="[
-          { inputChatTextLight: !$store.state.theme.dark },
-          { inputChatTextDark: $store.state.theme.dark },
-        ]"
         placeholder="Пишите текст...."
+        @focus="scrollTo($event.target as HTMLInputElement)"
+        autofocus
       />
     </div>
   </div>
@@ -23,23 +21,22 @@ export default defineComponent({
 });
 </script>
 
+<script lang="ts" setup>
+function scrollTo<T extends HTMLElement>(target: T): void {
+  setTimeout(() => target.scrollIntoView(), 300);
+}
+</script>
+
 <style lang="scss" scoped>
 .inputChatText:focus {
   box-shadow: none !important;
 }
 
-.inputChatTextLight {
-  background-color: rgb(255, 255, 255);
-  background-color: #00000000;
-  backdrop-filter: blur(20px) brightness(90%);
+.inputChatText {
+  background-color: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(20px) brightness(80%);
   border-top: 1px rgba(255, 255, 255, 0.08) solid;
   color: white;
-}
-
-.inputChatTextDark {
-  background-color: #00000000;
-  backdrop-filter: blur(20px) brightness(90%);
-  border-top: 1px rgba(255, 255, 255, 0.08) solid;
 }
 
 .home__chat {
@@ -47,6 +44,5 @@ export default defineComponent({
   height: 100%;
   flex-direction: column;
   justify-content: space-between;
-  backdrop-filter: blur(7px);
 }
 </style>

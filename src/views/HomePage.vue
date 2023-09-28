@@ -19,13 +19,18 @@
   grid-template-columns: 1fr 4fr;
   grid-template-rows: 1fr;
   height: 100svh;
+}
 
-  .home__chat {
-    grid-area: 1 / 2 / 2 / 3;
+@media (max-width: 1270px) {
+  .home {
+    grid-template-columns: 1fr;
+  }
+  .home__chatsPanel {
+    display: none;
   }
 
-  .home__chatsPanel {
-    grid-area: 1 / 1 / 2 / 2;
+  .home__containerChat {
+    grid-column: 1 / 3;
   }
 }
 

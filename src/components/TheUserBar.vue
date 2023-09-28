@@ -14,8 +14,9 @@ export default defineComponent({
 
 <style lang="scss" scoped>
 .userBar {
+  backdrop-filter: blur(40px) brightness(80%);
+  -webkit-backdrop-filter: blur(40px) brightness(80%);
+  background-color: rgba(0, 0, 0, 0);
   transition: 150ms ease-in-out background-color;
-  background-color: rgba(255, 255, 255, 0);
-  backdrop-filter: blur(40px) brightness(90%);
 }
 </style>
