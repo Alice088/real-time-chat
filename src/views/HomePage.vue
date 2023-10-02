@@ -35,7 +35,7 @@
 }
 
 .homeDark {
-  background-image: url("@/assets/backgroundForest-dark.jpg");
+  background-image: url("@/assets/background-dark.jpg");
   background-position: center;
   background-size: cover;
 }

@@ -1,6 +1,6 @@
 import { createStore } from "vuex";
 import StateOfTheme from "@/store/StateOfTheme";
-import { IRootState } from "@/types/IRootState";
+import { IRootState } from "@/interfaces/IRootState";
 
 export default createStore({
   modules: {

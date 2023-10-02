@@ -37,6 +37,7 @@ function scrollTo<T extends HTMLElement>(target: T): void {
   backdrop-filter: blur(20px) brightness(80%);
   border-top: 1px rgba(255, 255, 255, 0.08) solid;
   color: white;
+  text-align: start;
 }
 
 .home__chat {

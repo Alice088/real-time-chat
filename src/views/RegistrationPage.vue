@@ -21,6 +21,9 @@
   background-repeat: no-repeat;
   background-size: cover;
   height: 100svh;
+  min-height: 100vh;
+  width: 100svw;
+  overflow: hidden;
 }
 
 .dialogLoginIn {
@@ -43,19 +46,17 @@
 
 @media (max-width: 1000px) {
   .lightTheme {
-    background-image: none;
-    background-color: rgb(227, 227, 227);
+    background-image: url("@/assets/background-light-mobile.jpg");
   }
 }
 
 .darkTheme {
-  background-image: url("@/assets/backgroundForest-dark.jpg");
+  background-image: url("@/assets/background-dark.jpg");
 }
 
 @media (max-width: 1000px) {
   .darkTheme {
-    background-image: none;
-    background-color: #001122;
+    background-image: url("@/assets/background-dark-mobile.jpg");
   }
 }
 </style>

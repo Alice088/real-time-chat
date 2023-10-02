@@ -1,6 +1,6 @@
 <template>
   <Password
-    class="[&_input]:w-full [&_input]:text-center [&_input]:border-[2px]"
+    ref="passwordInput"
     v-model.trim="password"
     placeholder="Пароль"
     promptLabel="Придумайте пароль"
@@ -57,7 +57,7 @@ watch(isValidPassword, (newCount) => {
 });
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .rulesList {
   display: flex;
   flex-direction: column;

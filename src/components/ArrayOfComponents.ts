@@ -8,7 +8,6 @@ import ThePasswordInput from "@/components/UI/ThePasswordInput.vue";
 import InputText from "primevue/inputtext";
 import TheLoginInput from "@/components/UI/TheLoginInput.vue";
 import Button from "primevue/button";
-import TheButton from "@/components/UI/TheButton.vue";
 import TheUserBar from "@/components/TheUserBar.vue";
 import TheDialogLoginIn from "@/components/TheDialogLoginIn.vue";
 import TheChatPanel from "@/components/TheChatsPanel.vue";
@@ -16,7 +15,6 @@ import TheChat from "@/components/TheChat.vue";
 
 const components: Component[] = [
   Button,
-  TheButton,
   TheChangeThemeButton,
   TheLoadingScreenVue,
   Toast,

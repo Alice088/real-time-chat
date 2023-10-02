@@ -1,13 +1,4 @@
 <template>
-  <Toast
-    :style="{ minWidth: `10vw`, maxWidth: `98vw`, right: `5px` }"
-    :pt="{
-      buttonContainer: {
-        class: `p-2 pr-3`,
-      },
-    }"
-  />
-
   <form action="" method="post" class="dialog" v-on="$attrs">
     <TheChangeThemeButton />
 
@@ -22,7 +13,12 @@
         v-model:password="password"
       />
 
-      <TheButton @click.prevent="sendForm(login, password, toast)" />
+      <Button
+        @click.prevent="sendForm(login, password, toast)"
+        icon="pi pi-send"
+        iconPos="right"
+        label="Отправить"
+      />
     </div>
   </form>
 </template>
@@ -53,6 +49,10 @@ const isValidLogin = ref(true);
 
 const password = ref(``);
 const isValidPassword = ref(true);
+
+// function scrollTo<T extends HTMLElement>(target: T): void {
+//   setTimeout(() => target.scrollIntoView(), 300);
+// }
 
 function sendForm(
   login: typeInput,
@@ -89,11 +89,13 @@ const isInvalidInput = (result: typeValidFormOject): void => {
   grid-template-rows: max-content 55% 45%;
   width: 100%;
   height: 100svh;
-  transition: 300ms ease-in-out;
+  min-height: 100vh;
+  transition: 150ms ease-in-out;
   padding: 20px;
-  backdrop-filter: blur(109px);
-  background-color: rgba(0, 18, 36, 0);
+  backdrop-filter: blur(35px);
+  background-color: rgba(0, 0, 0, 0);
   border-left: 1px rgba(255, 255, 255, 0.081) solid;
+  overflow: hidden;
 
   .placeForm {
     display: flex;

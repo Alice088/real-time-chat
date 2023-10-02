@@ -16,7 +16,7 @@ export default defineComponent({
 
 <style lang="scss">
 .loadingScreen {
-  background-color: #001122;
+  background-color: #000000;
   position: fixed;
   inset: 0 0 0 0;
   justify-content: center;

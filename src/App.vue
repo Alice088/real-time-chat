@@ -1,4 +1,12 @@
 <template>
+  <Toast
+    :style="{ minWidth: `10vw`, maxWidth: `98vw`, right: `5px` }"
+    :pt="{
+      buttonContainer: {
+        class: `p-2 pr-3`,
+      },
+    }"
+  />
   <router-view v-slot="{ Component }">
     <Transition name="transitionPage" mode="out-in" appear>
       <component :is="Component" />
@@ -22,17 +30,6 @@ onMounted(() => setTimeout(() => store.commit(`isLodingChange`), 1500));
 @tailwind components;
 @tailwind utilities;
 
-@import url("https://fonts.googleapis.com/css2?family=Shrikhand&display=swap");
-
-html {
-  background-color: #001122;
-}
-
-* {
-  margin: 0;
-  overflow: hidden;
-}
-
 .loadingScreen-enter-active,
 .loadingScreen-leave-active {
   transition: opacity 1s ease-in-out;
@@ -46,7 +43,9 @@ html {
   opacity: 0;
 }
 
+//loadingScreen
 ///=============================
+//transitionPage
 
 .transitionPage-enter-active,
 .transitionPage-leave-active {

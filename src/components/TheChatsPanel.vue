@@ -17,7 +17,7 @@ export default defineComponent({
 <style lang="scss" scoped>
 .home__chatsPanel {
   transition: 150ms ease-in-out background-color;
-  background-color: rgba(0, 255, 238, 0);
+  background-color: rgba(0, 0, 0, 0);
   backdrop-filter: blur(20px) brightness(80%);
   border-right: 1px rgba(255, 255, 255, 0.08) solid;
 }
