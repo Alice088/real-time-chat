@@ -6,12 +6,23 @@
       { homeDark: $store.state.theme.dark },
     ]"
   >
-    <TheChatsPanel />
-    <TheChat />
+    <TheChatsPanel v-if="Store.state.isVisibleTheChatsPanel" />
+    <TheChat v-if="Store.state.isVisibleChat" />
   </div>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import { onMounted } from "vue";
+import { useStore } from "vuex";
+
+const Store = useStore();
+
+onMounted(() => {
+  if (window.innerWidth < 1270) {
+    Store.commit(`isVisibleTheChatsPanelChange`);
+  }
+});
+</script>
 
 <style scoped lang="scss">
 .home {
@@ -24,9 +35,6 @@
 @media (max-width: 1270px) {
   .home {
     grid-template-columns: 1fr;
-  }
-  .home__chatsPanel {
-    display: none;
   }
 
   .home__containerChat {

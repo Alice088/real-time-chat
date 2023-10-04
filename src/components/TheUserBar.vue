@@ -1,21 +1,49 @@
 <template>
   <div class="h-16 w-full userBar border-b-[2px] border-gray-50/5">
-    <Button
-      icon="pi pi-arrow-left"
-      class="bg-white/0 focus:bg-white/0 backButton"
-    />
+    <TheButton class="backButton" @click="BackToChatsPanel">
+      <img :src="objectOfSrc.src" alt="arrow back" class="w-10" />
+    </TheButton>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, watch, onMounted, reactive } from "vue";
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: "TheUserBar",
 });
 </script>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+const Store = useStore();
+
+function BackToChatsPanel(): void {
+  Store.commit(`isVisibleTheChatsPanelChange`);
+  Store.commit(`isVisibleChatChange`);
+}
+
+onMounted(() => {
+  Store.state.theme.dark
+    ? (objectOfSrc.src = objectOfSrc.lightIcon)
+    : (objectOfSrc.src = objectOfSrc.darkIcon);
+});
+
+const objectOfSrc = reactive({
+  src: "",
+  darkIcon: require("@/assets/icons/arrow-back-dark.svg"),
+  lightIcon: require("@/assets/icons/arrow-back-light.svg"),
+});
+
+watch(
+  () => Store.state.theme.dark,
+  (isDark: boolean): void => {
+    isDark
+      ? (objectOfSrc.src = objectOfSrc.lightIcon)
+      : (objectOfSrc.src = objectOfSrc.darkIcon);
+  }
+);
+</script>
 
 <style lang="scss" scoped>
 .userBar {

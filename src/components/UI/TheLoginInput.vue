@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, defineProps, defineEmits, watch, ref } from "vue";
 
 export default defineComponent({
   name: "TheLoginInput",
@@ -21,8 +21,6 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { defineProps, defineEmits, watch, ref } from "vue";
-
 const props = defineProps<{
   isValidLogin?: boolean;
   login?: string;

@@ -5,7 +5,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, reactive, watch, onMounted } from "vue";
+import { useStore } from "vuex";
+import { usePrimeVue } from "primevue/config";
 
 export default defineComponent({
   name: "TheChangeThemeButton",
@@ -13,10 +15,6 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { reactive, watch, onMounted } from "vue";
-import { useStore } from "vuex";
-import { usePrimeVue } from "primevue/config";
-
 const PrimeVue = usePrimeVue();
 const Store = useStore();
 

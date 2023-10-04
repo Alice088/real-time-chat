@@ -24,16 +24,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
-
-export default defineComponent({
-  name: "TheDialogLoginIn",
-});
-</script>
-
-<script lang="ts" setup>
+import { defineComponent, ref } from "vue";
 import showToastMessage from "@/hooks/showToastMessage";
-import { ref } from "vue";
 import { useToast } from "primevue/usetoast";
 import { typeInput } from "@/types/TypeFormsInput";
 import { ToastServiceMethods } from "primevue/toastservice";
@@ -41,6 +33,12 @@ import { typeValidFormOject } from "@/types/TypeValidFormOject";
 import { useRouter } from "vue-router";
 import Store from "@/store/Store";
 
+export default defineComponent({
+  name: "TheDialogLoginIn",
+});
+</script>
+
+<script lang="ts" setup>
 const router = useRouter();
 const toast = useToast();
 
@@ -49,10 +47,6 @@ const isValidLogin = ref(true);
 
 const password = ref(``);
 const isValidPassword = ref(true);
-
-// function scrollTo<T extends HTMLElement>(target: T): void {
-//   setTimeout(() => target.scrollIntoView(), 300);
-// }
 
 function sendForm(
   login: typeInput,
@@ -91,7 +85,7 @@ const isInvalidInput = (result: typeValidFormOject): void => {
   height: 100svh;
   min-height: 100vh;
   transition: 150ms ease-in-out;
-  padding: 20px;
+  padding: 10px;
   backdrop-filter: blur(35px);
   background-color: rgba(0, 0, 0, 0);
   border-left: 1px rgba(255, 255, 255, 0.081) solid;

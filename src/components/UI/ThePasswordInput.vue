@@ -9,9 +9,12 @@
     strongLabel="Хороший"
     toggleMask
     :class="{ 'p-invalid': !props.isValidPassword }"
+    :pt="{
+      panel: { class: 'p-4' },
+    }"
   >
     <template #footer>
-      <div class="border-t-[2px] border-solid border-gray-700 mt-5 pt-5">
+      <div class="border-t-2 border-gray-500 mt-5 pt-5">
         <strong>Правила ввода:</strong>
 
         <ul class="rulesList [&_li]:font-bold justify-center">
@@ -25,7 +28,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, defineProps, defineEmits, ref, watch } from "vue";
 
 export default defineComponent({
   name: "ThePasswordInput",
@@ -33,8 +36,6 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import { defineProps, defineEmits, ref, watch } from "vue";
-
 const props = defineProps<{
   isValidPassword?: boolean;
   password?: string;
@@ -57,7 +58,7 @@ watch(isValidPassword, (newCount) => {
 });
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .rulesList {
   display: flex;
   flex-direction: column;
