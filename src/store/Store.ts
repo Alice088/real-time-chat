@@ -12,7 +12,8 @@ export default createStore({
       isAuthorized: false,
       isVisibleTheChatsPanel: true,
       isVisibleChat: true,
-    };
+      usersList: [],
+    } as IRootState;
   },
 
   mutations: {

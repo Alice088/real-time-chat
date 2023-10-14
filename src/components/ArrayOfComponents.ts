@@ -13,6 +13,7 @@ import TheUserBar from "@/components/TheUserBar.vue";
 import TheDialogLoginIn from "@/components/TheDialogLoginIn.vue";
 import TheChatPanel from "@/components/TheChatsPanel.vue";
 import TheChat from "@/components/TheChat.vue";
+import TheItemOfChatsPanelList from "@/components/TheItemOfChatsPanelList.vue";
 
 const components: Component[] = [
   Button,
@@ -29,6 +30,7 @@ const components: Component[] = [
   ThePasswordInput,
   TheLoginInput,
   TheButton,
+  TheItemOfChatsPanelList,
 ];
 
 export default components;

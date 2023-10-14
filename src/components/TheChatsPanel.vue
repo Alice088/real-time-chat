@@ -1,11 +1,29 @@
 <template>
   <div class="home__chatsPanel">
-    <TheChangeThemeButton />
+    <div>
+      <TheItemOfChatsPanelList
+        v-for="User in Store.state.usersList"
+        :key="User.id"
+      >
+        <template v-slot:avatar>
+          {{ User.avatarImage }}
+        </template>
+        <template v-slot:name>
+          {{ User.name }}
+        </template>
+      </TheItemOfChatsPanelList>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { User } from "@/classes/User";
+import Store from "@/store/Store";
+
+const gosha = new User();
+
+Store.state.usersList.push(gosha);
 
 export default defineComponent({
   name: "TheChatsPanel",

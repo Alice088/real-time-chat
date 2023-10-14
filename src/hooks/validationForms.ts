@@ -11,7 +11,7 @@ function validation(inputValue: typeInput, name: string) {
     : { result: true, message: null, at: name };
 }
 
-export function useValidationPost(
+function useValidationForm(
   login: typeInput,
   password: typeInput
 ): typeValidFormOject {
@@ -40,3 +40,5 @@ export function useValidationPost(
     throw error;
   }
 }
+
+export { validation, useValidationForm };
