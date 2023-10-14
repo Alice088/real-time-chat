@@ -1,17 +1,17 @@
 <template>
   <div class="home__chatsPanel">
     <div>
-      <TheItemOfChatsPanelList
-        v-for="User in Store.state.usersList"
-        :key="User.id"
+      <!-- <TheItemOfChatsPanelList
+        v-for="user in Store.state.usersList"
+        :key="user.id"
       >
         <template v-slot:avatar>
-          {{ User.avatarImage }}
+          {{ user.avatarImage }}
         </template>
         <template v-slot:name>
-          {{ User.name }}
+          {{ user.name }}
         </template>
-      </TheItemOfChatsPanelList>
+      </TheItemOfChatsPanelList> -->
     </div>
   </div>
 </template>
@@ -20,10 +20,6 @@
 import { defineComponent } from "vue";
 import { User } from "@/classes/User";
 import Store from "@/store/Store";
-
-const gosha = new User();
-
-Store.state.usersList.push(gosha);
 
 export default defineComponent({
   name: "TheChatsPanel",
