@@ -22,14 +22,7 @@ export default defineComponent({
 });
 </script>
 
-<script lang="ts" setup>
-const gosha = new User(`gosha`);
-Store.state.usersList.length = 0;
-
-for (let i = 0; i < 10; i++) {
-  Store.state.usersList.push(gosha);
-}
-</script>
+<script lang="ts" setup></script>
 
 <style lang="scss" scoped>
 .home__chatsPanel {
