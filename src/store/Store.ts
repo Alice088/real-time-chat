@@ -2,7 +2,7 @@ import { createStore } from "vuex";
 import StateOfTheme from "@/store/StateOfTheme";
 import { IRootState } from "@/interfaces/IRootState";
 
-export default createStore({
+const store = createStore({
   modules: {
     theme: StateOfTheme,
   },
@@ -12,7 +12,8 @@ export default createStore({
       isAuthorized: false,
       isVisibleTheChatsPanel: true,
       isVisibleChat: true,
-    };
+      usersList: [],
+    } as IRootState;
   },
 
   mutations: {
@@ -33,3 +34,5 @@ export default createStore({
     },
   },
 });
+
+export default store;

@@ -29,6 +29,7 @@
 
 <script lang="ts">
 import { defineComponent, defineProps, defineEmits, ref, watch } from "vue";
+import Store from "@/store/Store";
 
 export default defineComponent({
   name: "ThePasswordInput",
@@ -48,6 +49,7 @@ const emits = defineEmits<{
 
 const password = ref(props.password);
 const isValidPassword = ref(props.isValidPassword);
+const passwordInput = ref(null);
 
 watch(password, (newCount) => {
   emits("update:password", newCount);
@@ -56,6 +58,13 @@ watch(password, (newCount) => {
 watch(isValidPassword, (newCount) => {
   emits("update:isValidPassword", newCount);
 });
+
+watch(
+  () => Store.state.isAuthorized,
+  () => {
+    password.value = null;
+  }
+);
 </script>
 
 <style lang="scss" scoped>

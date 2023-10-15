@@ -14,6 +14,7 @@
 
 <script lang="ts">
 import { defineComponent, defineProps, defineEmits, watch, ref } from "vue";
+import Store from "@/store/Store";
 
 export default defineComponent({
   name: "TheLoginInput",
@@ -42,4 +43,11 @@ watch(localLogin, (newValue) => {
 watch(isValidLoginValue, (newValue) => {
   emits("update:isValidLogin", newValue);
 });
+
+watch(
+  () => Store.state.isAuthorized,
+  () => {
+    localLogin.value = null;
+  }
+);
 </script>

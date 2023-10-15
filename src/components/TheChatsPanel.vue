@@ -1,11 +1,21 @@
 <template>
   <div class="home__chatsPanel">
-    <TheChangeThemeButton />
+    <div class="h-[100svh] overflow-y-scroll">
+      <TheItemOfChatsPanelList
+        v-for="user in Store.state.usersList"
+        :key="user.id"
+      >
+        <img :src="user.avatarImage" alt="avatar Image" />
+        <p>{{ user.name }}</p>
+      </TheItemOfChatsPanelList>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import { User } from "@/classes/User";
+import Store from "@/store/Store";
 
 export default defineComponent({
   name: "TheChatsPanel",
@@ -17,8 +27,8 @@ export default defineComponent({
 <style lang="scss" scoped>
 .home__chatsPanel {
   transition: 150ms ease-in-out background-color;
+  backdrop-filter: blur(40px) brightness(80%);
   background-color: rgba(0, 0, 0, 0);
-  backdrop-filter: blur(20px) brightness(80%);
   border-right: 1px rgba(255, 255, 255, 0.08) solid;
 }
 </style>
