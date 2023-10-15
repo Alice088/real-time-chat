@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, watch } from "vue";
 import showToastMessage from "@/hooks/showToastMessage";
 import { useToast } from "primevue/usetoast";
 import { typeInput } from "@/types/TypeFormsInput";
@@ -48,6 +48,8 @@ const isValidLogin = ref(true);
 const password = ref(``);
 const isValidPassword = ref(true);
 
+watch(password, (newPassword) => (password.value = newPassword));
+
 function sendForm(
   login: typeInput,
   password: typeInput,
@@ -58,11 +60,16 @@ function sendForm(
 
 const isInvalidInput = (result: typeValidFormOject): void => {
   try {
-    result.result // eslint-disable-next-line prettier/prettier
-    ? ((password.value = ``), (login.value = ``), setTimeout(() => router.push(`/home`), 900), Store.commit(`isAuthorizedChange`))
-      : result.error.at === "password"
-      ? (isValidPassword.value = false)
-      : (isValidLogin.value = false);
+    if (result.result) {
+      password.value = ``;
+      login.value = ``;
+      setTimeout(() => router.push(`/home`), 900);
+      Store.commit(`isAuthorizedChange`);
+    } else if (result.error.at === "password") {
+      isValidPassword.value = false;
+    } else {
+      isValidLogin.value = false;
+    }
   } catch (error) {
     alert(
       `непредвиденная ошибка, тип: ${error.message}, пожалуйста не паникуйте`
