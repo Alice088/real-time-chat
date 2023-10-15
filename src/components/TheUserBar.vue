@@ -48,7 +48,6 @@ watch(
 <style lang="scss" scoped>
 .userBar {
   backdrop-filter: blur(40px) brightness(80%);
-  -webkit-backdrop-filter: blur(40px) brightness(80%);
   background-color: rgba(0, 0, 0, 0);
   display: flex;
 }
