@@ -14,12 +14,22 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
 import { useStore } from "vuex";
+import device from "current-device";
+import { User } from "@/classes/User";
 
 const Store = useStore();
+const gosha = new User();
+Store.state.usersList.push(gosha);
 
 onMounted(() => {
-  if (window.innerWidth < 1270) {
+  const divHome = document.querySelector(`.home`) as HTMLDivElement;
+  // eslint-disable-next-line prettier/prettier
+  const divContainerChat = document.querySelector(`.home__containerChat`) as HTMLDivElement;
+
+  if (device.mobile() || (device.tablet() && divHome && divContainerChat)) {
     Store.commit(`isVisibleTheChatsPanelChange`);
+    divHome.style.gridTemplateColumns = `1fr`;
+    divContainerChat.style.gridColumn = `1 / 3`;
   }
 });
 </script>
@@ -30,16 +40,6 @@ onMounted(() => {
   grid-template-columns: 1fr 4fr;
   grid-template-rows: 1fr;
   height: 100svh;
-}
-
-@media (max-width: 1270px) {
-  .home {
-    grid-template-columns: 1fr;
-  }
-
-  .home__containerChat {
-    grid-column: 1 / 3;
-  }
 }
 
 .homeDark {

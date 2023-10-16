@@ -1,6 +1,10 @@
 <template>
   <div class="h-16 w-full userBar border-b-[2px] border-gray-50/5">
-    <TheButton class="backButton" @click="BackToChatsPanel">
+    <TheButton
+      class="backButton"
+      @click="BackToChatsPanel"
+      v-if="device.mobile() || device.tablet()"
+    >
       <img :src="objectOfSrc.src" alt="arrow back" class="w-10" />
     </TheButton>
   </div>
@@ -9,6 +13,7 @@
 <script lang="ts">
 import { defineComponent, watch, onMounted, reactive } from "vue";
 import { useStore } from "vuex";
+import device from "current-device";
 
 export default defineComponent({
   name: "TheUserBar",
@@ -50,11 +55,5 @@ watch(
   backdrop-filter: blur(40px) brightness(80%);
   background-color: rgba(0, 0, 0, 0);
   display: flex;
-}
-
-@media (min-width: 1270px) {
-  .backButton {
-    display: none;
-  }
 }
 </style>

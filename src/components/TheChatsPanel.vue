@@ -9,6 +9,13 @@
         <p>{{ user.getName() }}</p>
       </TheItemOfChatsPanelList>
     </div>
+    <p
+      v-if="Store.state.usersList.length === 0"
+      class="w-full self-center text-center"
+    >
+      Чатов пока нет
+    </p>
+    <!-- <div class="w-2 bg-red-600"></div> -->
   </div>
 </template>
 
@@ -26,6 +33,7 @@ import Store from "@/store/Store";
 
 <style lang="scss" scoped>
 .home__chatsPanel {
+  display: flex;
   transition: 150ms ease-in-out background-color;
   backdrop-filter: blur(40px) brightness(80%);
   background-color: rgba(0, 0, 0, 0);

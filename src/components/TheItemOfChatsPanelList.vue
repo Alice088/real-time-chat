@@ -1,15 +1,26 @@
 <template>
-  <div class="TheItemOfChatsPanelList">
+  <div class="TheItemOfChatsPanelList" @click="toChat">
     <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import Store from "@/store/Store";
+import device from "current-device";
 
 export default defineComponent({
   name: "TheItemOfChatsPanelList",
 });
+</script>
+
+<script lang="ts" setup>
+function toChat() {
+  if (device.mobile() || device.tablet()) {
+    Store.commit(`isVisibleTheChatsPanelChange`);
+    Store.commit(`isVisibleChatChange`);
+  }
+}
 </script>
 
 <style lang="scss">
@@ -26,6 +37,7 @@ export default defineComponent({
     img {
       transform: scale(1.1, 1.1);
     }
+    cursor: pointer;
   }
 
   p {
@@ -33,7 +45,7 @@ export default defineComponent({
     grid-row: 1 / 2;
     mix-blend-mode: difference;
     position: relative;
-    top: 20px;
+    top: 21px;
   }
 
   img {
@@ -43,7 +55,7 @@ export default defineComponent({
     position: relative;
     bottom: 50%;
     z-index: -999;
-    filter: blur(5px) brightness(70%);
+    filter: blur(5px) brightness(40%);
     transition: transform;
     transition-duration: 100ms;
     transition-timing-function: ease-in-out;
