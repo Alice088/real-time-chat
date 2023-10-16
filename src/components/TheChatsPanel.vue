@@ -2,11 +2,11 @@
   <div class="home__chatsPanel">
     <div class="h-[100svh] overflow-y-scroll">
       <TheItemOfChatsPanelList
-        v-for="user in Store.state.usersList"
+        v-for="user in Store.getters.usersList"
         :key="user.id"
       >
         <img :src="user.avatarImage" alt="avatar Image" />
-        <p>{{ user.name }}</p>
+        <p>{{ user.getName() }}</p>
       </TheItemOfChatsPanelList>
     </div>
   </div>
@@ -14,15 +14,15 @@
 
 <script lang="ts">
 import { defineComponent } from "vue";
-import { User } from "@/classes/User";
-import Store from "@/store/Store";
 
 export default defineComponent({
   name: "TheChatsPanel",
 });
 </script>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+import Store from "@/store/Store";
+</script>
 
 <style lang="scss" scoped>
 .home__chatsPanel {

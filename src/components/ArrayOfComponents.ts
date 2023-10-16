@@ -14,6 +14,7 @@ import TheDialogLoginIn from "@/components/TheDialogLoginIn.vue";
 import TheChatPanel from "@/components/TheChatsPanel.vue";
 import TheChat from "@/components/TheChat.vue";
 import TheItemOfChatsPanelList from "@/components/TheItemOfChatsPanelList.vue";
+import Dialog from "primevue/dialog";
 
 const components: Component[] = [
   Button,
@@ -31,6 +32,7 @@ const components: Component[] = [
   TheLoginInput,
   TheButton,
   TheItemOfChatsPanelList,
+  Dialog,
 ];
 
 export default components;

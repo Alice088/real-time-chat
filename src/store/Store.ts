@@ -1,8 +1,9 @@
 import { createStore } from "vuex";
+import { Store } from "vuex";
 import StateOfTheme from "@/store/StateOfTheme";
 import { IRootState } from "@/interfaces/IRootState";
 
-const store = createStore({
+const store: Store<IRootState> = createStore({
   modules: {
     theme: StateOfTheme,
   },
@@ -13,7 +14,11 @@ const store = createStore({
       isVisibleTheChatsPanel: true,
       isVisibleChat: true,
       usersList: [],
-    } as IRootState;
+    };
+  },
+
+  getters: {
+    usersList: (state: IRootState) => state.usersList,
   },
 
   mutations: {

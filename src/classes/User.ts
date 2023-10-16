@@ -18,16 +18,17 @@ class User {
     this._id = id;
   }
 
-  get name() {
+  getName() {
     return this._name;
   }
 
-  set name(newName: string) {
+  setName(newName: string): boolean {
     if (validation(newName, null).result) {
       //fetch
       this._name = newName;
+      return true;
     }
-    alert(validation(newName, null).message);
+    return false;
   }
 
   get bio() {

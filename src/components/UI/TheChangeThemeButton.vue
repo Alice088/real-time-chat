@@ -30,21 +30,19 @@ const objectOfSrc = reactive({
   lightIcon: require("@/assets/icons/sun.svg"),
 });
 
-function changeThemeOfPrimeVue(isDark: boolean): void {
+function changeTheme(isDark: boolean): void {
   isDark
     ? PrimeVue.changeTheme("soho-light", "soho-dark", "theme-link")
     : PrimeVue.changeTheme("soho-dark", "soho-light", "theme-link");
+
+  isDark
+    ? (objectOfSrc.src = objectOfSrc.lightIcon)
+    : (objectOfSrc.src = objectOfSrc.darkIcon);
 }
 
 watch(
   () => Store.state.theme.dark,
-  (isDark: boolean): void => {
-    changeThemeOfPrimeVue(isDark);
-
-    isDark
-      ? (objectOfSrc.src = objectOfSrc.lightIcon)
-      : (objectOfSrc.src = objectOfSrc.darkIcon);
-  }
+  (isDark: boolean): void => changeTheme(isDark)
 );
 </script>
 
