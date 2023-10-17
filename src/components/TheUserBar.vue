@@ -7,6 +7,9 @@
     >
       <img :src="objectOfSrc.src" alt="arrow back" class="w-10" />
     </TheButton>
+
+    <Button @click="createUser" />
+    <Button @click="deleteUser" />
   </div>
 </template>
 
@@ -14,6 +17,7 @@
 import { defineComponent, watch, onMounted, reactive } from "vue";
 import { useStore } from "vuex";
 import device from "current-device";
+import { User } from "@/classes/User";
 
 export default defineComponent({
   name: "TheUserBar",
@@ -22,6 +26,14 @@ export default defineComponent({
 
 <script lang="ts" setup>
 const Store = useStore();
+
+function createUser() {
+  Store.state.usersList.push(new User());
+}
+
+function deleteUser() {
+  Store.state.usersList.length = Store.state.usersList.length - 1;
+}
 
 function BackToChatsPanel(): void {
   Store.commit(`isVisibleTheChatsPanelChange`);
@@ -52,7 +64,7 @@ watch(
 
 <style lang="scss" scoped>
 .userBar {
-  backdrop-filter: blur(40px) brightness(80%);
+  backdrop-filter: blur(40px) brightness(85%);
   background-color: rgba(0, 0, 0, 0);
   display: flex;
 }

@@ -15,11 +15,8 @@
 import { onMounted } from "vue";
 import { useStore } from "vuex";
 import device from "current-device";
-import { User } from "@/classes/User";
 
 const Store = useStore();
-const gosha = new User();
-Store.state.usersList.push(gosha);
 
 onMounted(() => {
   const divHome = document.querySelector(`.home`) as HTMLDivElement;

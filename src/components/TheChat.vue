@@ -33,7 +33,7 @@ function scrollTo<T extends HTMLElement>(target: T): void {
 }
 
 .inputChatText {
-  backdrop-filter: blur(40px) brightness(80%);
+  backdrop-filter: blur(40px) brightness(85%);
   background-color: rgba(0, 0, 0, 0);
   border-top: 1px rgba(255, 255, 255, 0.08) solid;
   color: white;

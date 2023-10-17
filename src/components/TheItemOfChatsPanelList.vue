@@ -1,11 +1,14 @@
 <template>
-  <div class="TheItemOfChatsPanelList" @click="toChat">
+  <div
+    class="TheItemOfChatsPanelList"
+    @click="toChat($event.currentTarget as HTMLDivElement)"
+  >
     <slot></slot>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, defineEmits } from "vue";
 import Store from "@/store/Store";
 import device from "current-device";
 
@@ -15,7 +18,13 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-function toChat() {
+const emit = defineEmits<{
+  (e: `currentItem`, currentItem: HTMLDivElement);
+}>();
+
+function toChat(target: HTMLDivElement) {
+  emit(`currentItem`, target);
+
   if (device.mobile() || device.tablet()) {
     Store.commit(`isVisibleTheChatsPanelChange`);
     Store.commit(`isVisibleChatChange`);
@@ -46,6 +55,7 @@ function toChat() {
     mix-blend-mode: difference;
     position: relative;
     top: 21px;
+    color: white;
   }
 
   img {
@@ -60,5 +70,9 @@ function toChat() {
     transition-duration: 100ms;
     transition-timing-function: ease-in-out;
   }
+}
+
+.currentItem {
+  border: 1px solid rgba(255, 255, 255, 0.465);
 }
 </style>

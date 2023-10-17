@@ -23,7 +23,7 @@ import { onMounted } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
-onMounted(() => setTimeout(() => store.commit(`isLodingChange`), 1500));
+onMounted(() => setTimeout(() => store.commit(`isLodingChange`), 0));
 </script>
 
 <style lang="scss">

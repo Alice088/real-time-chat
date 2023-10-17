@@ -10,7 +10,7 @@
     toggleMask
     :class="{ 'p-invalid': !props.isValidPassword }"
     :pt="{
-      panel: { class: 'p-4' },
+      panel: { class: 'p-3 pt-5' },
     }"
   >
     <template #footer>
