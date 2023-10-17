@@ -31,13 +31,20 @@ const objectOfSrc = reactive({
 });
 
 function changeTheme(isDark: boolean): void {
-  isDark
-    ? PrimeVue.changeTheme("soho-light", "soho-dark", "theme-link")
-    : PrimeVue.changeTheme("soho-dark", "soho-light", "theme-link");
+  try {
+    isDark
+      ? PrimeVue.changeTheme("soho-light", "soho-dark", "theme-link")
+      : PrimeVue.changeTheme("soho-dark", "soho-light", "theme-link");
 
-  isDark
-    ? (objectOfSrc.src = objectOfSrc.lightIcon)
-    : (objectOfSrc.src = objectOfSrc.darkIcon);
+    isDark
+      ? (objectOfSrc.src = objectOfSrc.lightIcon)
+      : (objectOfSrc.src = objectOfSrc.darkIcon);
+  } catch (error) {
+    alert(
+      `непредвиденная ошибка, тип: ${error.message}, пожалуйста не паникуйте`
+    );
+    throw error;
+  }
 }
 
 watch(

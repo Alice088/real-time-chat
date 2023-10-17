@@ -15,10 +15,10 @@ function useValidationForm(
   login: typeInput,
   password: typeInput
 ): typeValidFormOject {
-  const isInvalidLogin = validation(login, `login`);
-  const isInvalidPassword = validation(password, `password`);
-
   try {
+    const isInvalidLogin = validation(login, `login`);
+    const isInvalidPassword = validation(password, `password`);
+
     return {
       result: isInvalidLogin.result && isInvalidPassword.result,
       error: !isInvalidLogin.result

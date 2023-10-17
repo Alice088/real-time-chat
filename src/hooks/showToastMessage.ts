@@ -8,9 +8,11 @@ const showToastMessage = (
   password: typeInput,
   toast: ToastServiceMethods
 ): typeValidFormOject => {
-  const validResult = useValidationForm(login, password);
+  let validResult;
 
   try {
+    validResult = useValidationForm(login, password);
+
     validResult.result
       ? toast.add({
           severity: "success",

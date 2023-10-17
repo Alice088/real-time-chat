@@ -2,7 +2,7 @@
   <span class="p-input-icon-right">
     <i class="pi pi-user" />
     <InputText
-      class="w-full text-center border-[2px]"
+      class="w-full text-center border-[1px]"
       aria-describedby="loginInput"
       v-model.trim="localLogin"
       placeholder="Логин"
