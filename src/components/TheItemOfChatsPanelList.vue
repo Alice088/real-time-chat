@@ -10,7 +10,6 @@
 <script lang="ts">
 import { defineComponent, defineEmits } from "vue";
 import Store from "@/store/Store";
-import device from "current-device";
 
 export default defineComponent({
   name: "TheItemOfChatsPanelList",
@@ -25,9 +24,9 @@ const emit = defineEmits<{
 function toChat(target: HTMLDivElement) {
   emit(`currentItem`, target);
 
-  if (device.mobile() || device.tablet()) {
-    Store.commit(`isVisibleTheChatsPanelChange`);
-    Store.commit(`isVisibleChatChange`);
+  if (document.documentElement.clientWidth < 1200) {
+    Store.commit(`isVisibleTheChatsPanelChange`, false);
+    Store.commit(`isVisibleChatChange`, true);
   }
 }
 </script>

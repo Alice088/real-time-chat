@@ -13,21 +13,22 @@
 
 <script lang="ts" setup>
 import { onMounted } from "vue";
-import { useStore } from "vuex";
 import device from "current-device";
-
-const Store = useStore();
+import Store from "@/store/Store";
 
 onMounted(() => {
-  const divHome = document.querySelector(`.home`) as HTMLDivElement;
-  // eslint-disable-next-line prettier/prettier
-  const divContainerChat = document.querySelector(`.home__containerChat`) as HTMLDivElement;
-
-  if (device.mobile() || (device.tablet() && divHome && divContainerChat)) {
+  if (device.mobile() || device.tablet()) {
     Store.commit(`isVisibleTheChatsPanelChange`);
-    divHome.style.gridTemplateColumns = `1fr`;
-    divContainerChat.style.gridColumn = `1 / 3`;
   }
+
+  window.addEventListener("resize", () => {
+    if (document.documentElement.clientWidth < 1200) {
+      Store.commit(`isVisibleChatChange`, false);
+    } else {
+      Store.commit(`isVisibleChatChange`, true);
+      Store.commit(`isVisibleTheChatsPanelChange`, true);
+    }
+  });
 });
 </script>
 
@@ -49,5 +50,15 @@ onMounted(() => {
   background-image: url("@/assets/background-light.jpg");
   background-position: center;
   background-size: cover;
+}
+
+@media (max-width: 1200px) {
+  .home__containerChat {
+    grid-column: 1 / 3;
+  }
+
+  .home {
+    grid-template-columns: 1fr;
+  }
 }
 </style>

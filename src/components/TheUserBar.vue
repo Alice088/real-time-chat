@@ -3,7 +3,7 @@
     <TheButton
       class="backButton"
       @click="BackToChatsPanel"
-      v-if="device.mobile() || device.tablet()"
+      v-if="windwosWidth < 1200"
     >
       <img :src="objectOfSrc.src" alt="arrow back" class="w-10" />
     </TheButton>
@@ -14,9 +14,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, watch, onMounted, reactive } from "vue";
+import { defineComponent, watch, onMounted, reactive, ref } from "vue";
 import { useStore } from "vuex";
-import device from "current-device";
 import { User } from "@/classes/User";
 
 export default defineComponent({
@@ -26,6 +25,13 @@ export default defineComponent({
 
 <script lang="ts" setup>
 const Store = useStore();
+let windwosWidth = ref(0);
+
+onMounted(() => {
+  window.addEventListener("resize", () => {
+    windwosWidth.value = document.documentElement.clientWidth;
+  });
+});
 
 function createUser() {
   Store.state.usersList.push(new User());
@@ -36,11 +42,13 @@ function deleteUser() {
 }
 
 function BackToChatsPanel(): void {
-  Store.commit(`isVisibleTheChatsPanelChange`);
-  Store.commit(`isVisibleChatChange`);
+  Store.commit(`isVisibleTheChatsPanelChange`, true);
+  Store.commit(`isVisibleChatChange`, false);
 }
 
 onMounted(() => {
+  windwosWidth.value = document.documentElement.clientWidth;
+
   Store.state.theme.dark
     ? (objectOfSrc.src = objectOfSrc.lightIcon)
     : (objectOfSrc.src = objectOfSrc.darkIcon);

@@ -13,7 +13,7 @@
       </transition-group>
     </div>
     <p
-      v-timer-if="{ flag: Store.state.usersList.length === 0, time: 500 }"
+      v-timer-if="{ flag: Store.state.usersList.length === 0, time: 600 }"
       class="w-full self-center text-center"
     >
       Чатов пока нет

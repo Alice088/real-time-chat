@@ -30,12 +30,12 @@ const store: Store<IRootState> = createStore({
       state.isAuthorized = !state.isAuthorized;
     },
 
-    isVisibleTheChatsPanelChange(state: IRootState): void {
-      state.isVisibleTheChatsPanel = !state.isVisibleTheChatsPanel;
+    isVisibleTheChatsPanelChange(state: IRootState, toBoolean: boolean): void {
+      state.isVisibleTheChatsPanel = toBoolean;
     },
 
-    isVisibleChatChange(state: IRootState): void {
-      state.isVisibleChat = !state.isVisibleChat;
+    isVisibleChatChange(state: IRootState, toBoolean: boolean): void {
+      state.isVisibleChat = toBoolean;
     },
   },
 });
