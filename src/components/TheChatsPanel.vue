@@ -12,13 +12,20 @@
         </TheItemOfChatsPanelList>
       </transition-group>
     </div>
+
     <p
       v-timer-if="{ flag: Store.state.usersList.length === 0, time: 600 }"
       class="w-full self-center text-center"
     >
       Чатов пока нет
     </p>
-    <!-- <div class="w-2 bg-red-600"></div> -->
+
+    <div
+      class="w-2 hover:w-6 cursor-ew-resize transition-all duration-500 holdBar"
+      @mousedown="changeWidthOfPanel"
+    >
+      <p class="transition-all duration-700">Тяните</p>
+    </div>
   </div>
 </template>
 
@@ -40,6 +47,30 @@ function currentItemClick(item: HTMLDivElement) {
   lastItem = item;
   item.classList.add(`currentItem`);
 }
+
+function changeWidthOfPanel(event: MouseEvent): void {
+  let pointX = event.clientX;
+  let element: HTMLElement = document.querySelector(`.home__chatsPanel`);
+  let startWidth = element.style.width;
+
+  document.addEventListener(`mousemove`, onMouseMove);
+
+  function onMouseMove(mouse: MouseEvent) {
+    if (pointX > mouse.clientX) {
+      +element.style.width.slice(0, -2) > 307
+        ? (element.style.width = pointX + mouse.clientX - pointX + `px`)
+        : (element.style.width = startWidth);
+    } else {
+      +element.style.width.slice(0, -2) < 1000
+        ? (element.style.width = pointX + mouse.clientX - pointX + `px`)
+        : (element.style.width = `1000px`);
+    }
+  }
+
+  document.addEventListener(`mouseup`, () => {
+    document.removeEventListener(`mousemove`, onMouseMove);
+  });
+}
 </script>
 
 <style lang="scss" scoped>
@@ -52,6 +83,31 @@ function currentItemClick(item: HTMLDivElement) {
 }
 .currentItem {
   outline: 1px solid white;
+}
+
+.holdBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 3px;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+  p {
+    opacity: 0;
+    transform: rotate(90deg);
+  }
+
+  &:hover {
+    p {
+      opacity: 1;
+    }
+
+    background-color: rgba(255, 255, 255, 0.328);
+  }
 }
 
 .itemOfChatList-enter-active,
