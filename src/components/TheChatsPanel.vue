@@ -49,22 +49,15 @@ function currentItemClick(item: HTMLDivElement) {
 }
 
 function changeWidthOfPanel(event: MouseEvent): void {
-  let pointX = event.clientX;
-  let element: HTMLElement = document.querySelector(`.home__chatsPanel`);
-  let startWidth = element.style.width;
+  const element: HTMLElement = document.querySelector(`.home__chatsPanel`);
+  const startWidth = element.offsetWidth;
+  const startX = event.clientX;
 
   document.addEventListener(`mousemove`, onMouseMove);
 
   function onMouseMove(mouse: MouseEvent) {
-    if (pointX > mouse.clientX) {
-      +element.style.width.slice(0, -2) > 307
-        ? (element.style.width = pointX + mouse.clientX - pointX + `px`)
-        : (element.style.width = startWidth);
-    } else {
-      +element.style.width.slice(0, -2) < 1000
-        ? (element.style.width = pointX + mouse.clientX - pointX + `px`)
-        : (element.style.width = `1000px`);
-    }
+    let newWidth = startWidth + mouse.clientX - startX;
+    element.style.width = `${Math.max(startWidth, Math.min(700, newWidth))}px`;
   }
 
   document.addEventListener(`mouseup`, () => {
@@ -106,7 +99,16 @@ function changeWidthOfPanel(event: MouseEvent): void {
       opacity: 1;
     }
 
-    background-color: rgba(255, 255, 255, 0.328);
+    background-color: #ffffff54;
+  }
+
+  &:active {
+    background-color: #ffffff54;
+    width: 24px;
+
+    p {
+      opacity: 1;
+    }
   }
 }
 
