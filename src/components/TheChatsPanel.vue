@@ -1,5 +1,5 @@
 <template>
-  <div class="home__chatsPanel">
+  <div class="home__chatsPanel" ref="chatsPanel">
     <div class="h-[100svh] overflow-y-scroll">
       <transition-group name="itemOfChatList" appear>
         <TheItemOfChatsPanelList
@@ -21,8 +21,9 @@
     </p>
 
     <div
+      v-if="!device.mobile() || !device.mobile()"
+      @mousedown="changePanelWidth"
       class="w-2 hover:w-6 cursor-ew-resize transition-all duration-500 holdBar"
-      @mousedown="changeWidthOfPanel"
     >
       <p class="transition-all duration-700">Тяните</p>
     </div>
@@ -30,8 +31,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "vue";
+import { defineComponent, ref, onMounted, Ref } from "vue";
 import { vTimerIf } from "@/directives/vTimerIf";
+import Store from "@/store/Store";
+import device from "current-device";
 
 export default defineComponent({
   name: "TheChatsPanel",
@@ -39,8 +42,15 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
-import Store from "@/store/Store";
 let lastItem: HTMLDivElement;
+const chatsPanel: Ref<HTMLElement> = ref(null);
+let isDragging = false;
+let startX = 0;
+let startWidth = 0;
+
+onMounted(() => {
+  startWidth = chatsPanel.value.offsetWidth;
+});
 
 function currentItemClick(item: HTMLDivElement) {
   if (lastItem) lastItem.classList.remove(`currentItem`);
@@ -48,21 +58,21 @@ function currentItemClick(item: HTMLDivElement) {
   item.classList.add(`currentItem`);
 }
 
-function changeWidthOfPanel(event: MouseEvent): void {
-  const element: HTMLElement = document.querySelector(`.home__chatsPanel`);
-  const startWidth = element.offsetWidth;
-  const startX = event.clientX;
+function changePanelWidth(event: MouseEvent) {
+  startX = event.clientX - chatsPanel.value.offsetWidth;
 
-  document.addEventListener(`mousemove`, onMouseMove);
+  document.addEventListener("mousemove", onMouseMove);
 
-  function onMouseMove(mouse: MouseEvent) {
-    let newWidth = startWidth + mouse.clientX - startX;
-    element.style.width = `${Math.max(startWidth, Math.min(700, newWidth))}px`;
-  }
+  document.addEventListener("mouseup", () =>
+    document.removeEventListener("mousemove", onMouseMove)
+  );
+}
 
-  document.addEventListener(`mouseup`, () => {
-    document.removeEventListener(`mousemove`, onMouseMove);
-  });
+function onMouseMove(event: MouseEvent) {
+  chatsPanel.value.style.width = `${Math.min(
+    Math.max(event.clientX - startX, startWidth),
+    700
+  )}px`;
 }
 </script>
 
@@ -74,6 +84,7 @@ function changeWidthOfPanel(event: MouseEvent): void {
   background-color: rgba(0, 0, 0, 0);
   border-right: 1px rgba(255, 255, 255, 0.08) solid;
 }
+
 .currentItem {
   outline: 1px solid white;
 }

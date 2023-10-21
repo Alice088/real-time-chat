@@ -1,6 +1,6 @@
 <template>
   <div
-    class="home"
+    class="home overflow-hidden"
     :class="[
       { homeLight: !$store.state.theme.dark },
       { homeDark: $store.state.theme.dark },
