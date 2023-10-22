@@ -11,11 +11,10 @@
     <TheChat v-if="Store.state.isVisibleChat" />
   </div>
 
-  <div
-    v-else
-    class="h-[100svh] h-min-[100vh] flex flex-col text-center justify-center"
-  >
-    <p>Welcome, {{ Store.state.currentUser.getName() }}</p>
+  <div v-else class="h-[100svh] welcomeScreen overflow-hidden">
+    <div class="h-[101svh] flex flex-col text-center justify-center text-white">
+      <p>Welcome, {{ Store.state.currentUser.getName() }}</p>
+    </div>
   </div>
 </template>
 
@@ -33,7 +32,7 @@ onMounted(() => {
   if (Store.state.isFirstEntry) {
     setTimeout(() => {
       Store.commit(`isFirstEntryChange`);
-    }, 2500);
+    }, 3000);
   }
 });
 
@@ -69,6 +68,16 @@ function resizeHandler() {
   background-image: url("@/assets/background-light.jpg");
   background-position: center;
   background-size: cover;
+}
+
+.welcomeScreen {
+  background-image: url("@/assets/giphy.gif");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  div {
+    backdrop-filter: blur(50px);
+  }
 }
 
 @media (max-width: 1200px) {

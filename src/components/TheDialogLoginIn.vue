@@ -53,15 +53,29 @@ function sendForm(
   password: typeInput,
   toast: ToastServiceMethods
 ): void {
-  isInvalidingInput(showToastMessage(login, password, toast));
+  const loopFlag = true;
+
+  out: while (loopFlag) {
+    try {
+      isInvalidingInput(showToastMessage(login, password, toast));
+      break out;
+    } catch (error: unknown) {
+      alert(`Ошибка!: ${error}`);
+      console.log(error);
+
+      if (confirm(`Повторить попытку?`)) continue;
+      else break out;
+    }
+  }
 }
 
 const isInvalidingInput = (result: typeValidFormOject): void => {
   if (result.result) postRegistrationTasks();
-
-  result.error.at === "password"
-    ? (isValidPassword.value = false)
-    : (isValidLogin.value = false);
+  else {
+    result.error.at === "password"
+      ? (isValidPassword.value = false)
+      : (isValidLogin.value = false);
+  }
 
   setTimeout(() => {
     isValidPassword.value = true;
@@ -70,6 +84,7 @@ const isInvalidingInput = (result: typeValidFormOject): void => {
 };
 
 function postRegistrationTasks() {
+  //fetch
   Store.commit(`setCurrentUser`, new User(login.value));
 
   password.value = null;
