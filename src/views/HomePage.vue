@@ -1,5 +1,6 @@
 <template>
   <div
+    v-if="!Store.state.isFirstEntry"
     class="home overflow-hidden"
     :class="[
       { homeLight: !$store.state.theme.dark },
@@ -9,30 +10,45 @@
     <TheChatsPanel v-if="Store.state.isVisibleTheChatsPanel" />
     <TheChat v-if="Store.state.isVisibleChat" />
   </div>
+
+  <div
+    v-else
+    class="h-[100svh] h-min-[100vh] flex flex-col text-center justify-center"
+  >
+    <p>Welcome, {{ Store.state.currentUser.getName() }}</p>
+  </div>
 </template>
 
 <script lang="ts" setup>
 import { onMounted } from "vue";
 import device from "current-device";
 import Store from "@/store/Store";
+const isMobileOrTable = device.mobile() || device.tablet();
 
 onMounted(() => {
-  if (device.mobile() || device.tablet()) {
-    Store.commit(`isVisibleTheChatsPanelChange`);
-  }
+  if (isMobileOrTable) Store.commit(`isVisibleTheChatsPanelChange`);
 
-  window.addEventListener("resize", () => {
-    if (document.documentElement.clientWidth < 1200) {
-      Store.commit(`isVisibleChatChange`, false);
-      (
-        document.querySelector(`.home__chatsPanel`) as HTMLDivElement
-      ).style.width = `auto`;
-    } else {
-      Store.commit(`isVisibleChatChange`, true);
-      Store.commit(`isVisibleTheChatsPanelChange`, true);
-    }
-  });
+  window.addEventListener("resize", resizeHandler);
+
+  if (Store.state.isFirstEntry) {
+    setTimeout(() => {
+      Store.commit(`isFirstEntryChange`);
+    }, 2500);
+  }
 });
+
+function resizeHandler() {
+  const chatsPanel: HTMLDivElement =
+    document.querySelector(`.home__chatsPanel`);
+
+  if (document.documentElement.clientWidth < 1200) {
+    Store.commit(`isVisibleChatChange`, false);
+    if (chatsPanel) chatsPanel.style.width = `auto`;
+  } else {
+    Store.commit(`isVisibleChatChange`, true);
+    Store.commit(`isVisibleTheChatsPanelChange`, true);
+  }
+}
 </script>
 
 <style scoped lang="scss">

@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 import { Store } from "vuex";
 import StateOfTheme from "@/store/StateOfTheme";
 import { IRootState } from "@/interfaces/IRootState";
+import { User } from "@/classes/User";
 
 const store: Store<IRootState> = createStore({
   modules: {
@@ -9,11 +10,13 @@ const store: Store<IRootState> = createStore({
   },
   state() {
     return {
+      isFirstEntry: true,
       isLoading: true,
       isAuthorized: false,
       isVisibleTheChatsPanel: true,
       isVisibleChat: true,
       usersList: [],
+      currentUser: null,
     };
   },
 
@@ -36,6 +39,14 @@ const store: Store<IRootState> = createStore({
 
     isVisibleChatChange(state: IRootState, toBoolean: boolean): void {
       state.isVisibleChat = toBoolean;
+    },
+
+    isFirstEntryChange(state: IRootState) {
+      state.isFirstEntry = false;
+    },
+
+    setCurrentUser(state: IRootState, User: User) {
+      state.currentUser = User;
     },
   },
 });
