@@ -7,16 +7,12 @@
     >
       <img :src="objectOfSrc.src" alt="arrow back" class="w-10" />
     </TheButton>
-
-    <Button @click="createUser" />
-    <Button @click="deleteUser" />
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent, watch, onMounted, reactive, ref } from "vue";
 import { useStore } from "vuex";
-import { User } from "@/classes/User";
 
 export default defineComponent({
   name: "TheUserBar",
@@ -32,14 +28,6 @@ onMounted(() => {
     windwosWidth.value = document.documentElement.clientWidth;
   });
 });
-
-function createUser() {
-  Store.state.usersList.push(new User());
-}
-
-function deleteUser() {
-  Store.state.usersList.length = Store.state.usersList.length - 1;
-}
 
 function BackToChatsPanel(): void {
   Store.commit(`isVisibleTheChatsPanelChange`, true);

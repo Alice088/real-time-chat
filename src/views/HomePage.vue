@@ -24,6 +24,9 @@ onMounted(() => {
   window.addEventListener("resize", () => {
     if (document.documentElement.clientWidth < 1200) {
       Store.commit(`isVisibleChatChange`, false);
+      (
+        document.querySelector(`.home__chatsPanel`) as HTMLDivElement
+      ).style.width = `auto`;
     } else {
       Store.commit(`isVisibleChatChange`, true);
       Store.commit(`isVisibleTheChatsPanelChange`, true);

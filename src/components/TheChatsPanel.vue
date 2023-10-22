@@ -15,18 +15,16 @@
 
     <p
       v-timer-if="{ flag: Store.state.usersList.length === 0, time: 600 }"
-      class="w-full self-center text-center"
+      class="w-full self-center text-center select-none"
     >
       Чатов пока нет
     </p>
 
     <div
-      v-if="!device.mobile() || !device.mobile()"
+      v-if="documentWidth > 1200"
       @mousedown="changePanelWidth"
-      class="w-2 hover:w-6 cursor-ew-resize transition-all duration-500 holdBar"
-    >
-      <p class="transition-all duration-700">Тяните</p>
-    </div>
+      class="w-2 cursor-ew-resize"
+    ></div>
   </div>
 </template>
 
@@ -34,7 +32,6 @@
 import { defineComponent, ref, onMounted, Ref } from "vue";
 import { vTimerIf } from "@/directives/vTimerIf";
 import Store from "@/store/Store";
-import device from "current-device";
 
 export default defineComponent({
   name: "TheChatsPanel",
@@ -44,12 +41,16 @@ export default defineComponent({
 <script lang="ts" setup>
 let lastItem: HTMLDivElement;
 const chatsPanel: Ref<HTMLElement> = ref(null);
-let isDragging = false;
 let startX = 0;
 let startWidth = 0;
+let documentWidth = ref(document.documentElement.offsetWidth);
 
 onMounted(() => {
   startWidth = chatsPanel.value.offsetWidth;
+
+  window.addEventListener(`resize`, () => {
+    documentWidth.value = document.documentElement.offsetWidth;
+  });
 });
 
 function currentItemClick(item: HTMLDivElement) {
@@ -59,20 +60,20 @@ function currentItemClick(item: HTMLDivElement) {
 }
 
 function changePanelWidth(event: MouseEvent) {
-  startX = event.clientX - chatsPanel.value.offsetWidth;
+  startX = chatsPanel.value.offsetWidth - event.clientX;
 
   document.addEventListener("mousemove", onMouseMove);
+
+  function onMouseMove(event: MouseEvent) {
+    chatsPanel.value.style.width = `${Math.min(
+      Math.max(event.clientX - startX, startWidth),
+      700
+    )}px`;
+  }
 
   document.addEventListener("mouseup", () =>
     document.removeEventListener("mousemove", onMouseMove)
   );
-}
-
-function onMouseMove(event: MouseEvent) {
-  chatsPanel.value.style.width = `${Math.min(
-    Math.max(event.clientX - startX, startWidth),
-    700
-  )}px`;
 }
 </script>
 
@@ -87,40 +88,6 @@ function onMouseMove(event: MouseEvent) {
 
 .currentItem {
   outline: 1px solid white;
-}
-
-.holdBar {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-left: 3px;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-
-  p {
-    opacity: 0;
-    transform: rotate(90deg);
-  }
-
-  &:hover {
-    p {
-      opacity: 1;
-    }
-
-    background-color: #ffffff54;
-  }
-
-  &:active {
-    background-color: #ffffff54;
-    width: 24px;
-
-    p {
-      opacity: 1;
-    }
-  }
 }
 
 .itemOfChatList-enter-active,
