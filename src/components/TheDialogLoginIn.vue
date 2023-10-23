@@ -55,16 +55,16 @@ function sendForm(
 ): void {
   const loopFlag = true;
 
-  out: while (loopFlag) {
+  while (loopFlag) {
     try {
       isInvalidingInput(showToastMessage(login, password, toast));
-      break out;
+      break;
     } catch (error: unknown) {
       alert(`Ошибка!: ${error}`);
       console.log(error);
 
       if (confirm(`Повторить попытку?`)) continue;
-      else break out;
+      else break;
     }
   }
 }
@@ -85,7 +85,7 @@ const isInvalidingInput = (result: typeValidFormOject): void => {
 
 function postRegistrationTasks() {
   //fetch
-  Store.commit(`setCurrentUser`, new User(login.value));
+  Store.commit(`setMainUser`, new User(login.value));
 
   password.value = null;
   login.value = null;

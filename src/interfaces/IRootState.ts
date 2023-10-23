@@ -8,6 +8,7 @@ interface IRootState {
   isVisibleChat: boolean;
   usersList: User[];
   currentUser: User | null;
+  mainUser: User | null;
 }
 
 export { IRootState };

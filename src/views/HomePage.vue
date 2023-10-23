@@ -13,7 +13,7 @@
 
   <div v-else class="h-[100svh] welcomeScreen overflow-hidden">
     <div class="h-[101svh] flex flex-col text-center justify-center text-white">
-      <p>Welcome, {{ Store.state.currentUser.getName() }}</p>
+      <p>Welcome, {{ Store.state.mainUser.getName() }}</p>
     </div>
   </div>
 </template>
@@ -26,8 +26,7 @@ const isMobileOrTable = device.mobile() || device.tablet();
 
 onMounted(() => {
   if (isMobileOrTable) Store.commit(`isVisibleTheChatsPanelChange`);
-
-  window.addEventListener("resize", resizeHandler);
+  else window.addEventListener("resize", resizeHandler);
 
   if (Store.state.isFirstEntry) {
     setTimeout(() => {
@@ -41,7 +40,7 @@ function resizeHandler() {
     document.querySelector(`.home__chatsPanel`);
 
   if (document.documentElement.clientWidth < 1200) {
-    Store.commit(`isVisibleChatChange`, false);
+    if (!Store.state.isVisibleChat) Store.commit(`isVisibleChatChange`, false);
     if (chatsPanel) chatsPanel.style.width = `auto`;
   } else {
     Store.commit(`isVisibleChatChange`, true);

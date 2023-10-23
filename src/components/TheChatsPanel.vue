@@ -6,6 +6,7 @@
           v-for="user in Store.getters.usersList"
           :key="user.id"
           @currentItem="currentItemClick($event)"
+          :user="user"
         >
           <img :src="user.avatarImage" alt="avatar Image" />
           <p>{{ user.getName() }}</p>

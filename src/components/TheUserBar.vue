@@ -8,7 +8,7 @@
       <img :src="objectOfSrc.src" alt="arrow back" class="w-10" />
     </TheButton>
 
-    <div class="flex items-center gap-x-3 m-4">
+    <div class="flex items-center gap-x-3 m-4" v-if="Store.state.currentUser">
       <img :src="Store.state.currentUser.avatarImage" alt="avatar" />
       <p>
         {{ Store.state.currentUser.getName() }}

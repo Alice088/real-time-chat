@@ -44,7 +44,7 @@ class User {
     return this._avatarImage;
   }
 
-  set avatarImage(newAvatarImage: string) {
+  setAvatarImage(newAvatarImage: string) {
     //fetch
     this._avatarImage = newAvatarImage;
   }

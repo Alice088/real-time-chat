@@ -8,8 +8,9 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, defineEmits } from "vue";
+import { defineComponent, defineEmits, defineProps } from "vue";
 import Store from "@/store/Store";
+import { User } from "@/classes/User";
 
 export default defineComponent({
   name: "TheItemOfChatsPanelList",
@@ -21,7 +22,12 @@ const emit = defineEmits<{
   (e: `currentItem`, currentItem: HTMLDivElement);
 }>();
 
+const props = defineProps<{
+  user: User;
+}>();
+
 function toChat(target: HTMLDivElement) {
+  Store.commit(`setCurrentUser`, props.user);
   emit(`currentItem`, target);
 
   if (document.documentElement.clientWidth < 1200) {

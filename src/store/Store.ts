@@ -17,6 +17,7 @@ const store: Store<IRootState> = createStore({
       isVisibleChat: true,
       usersList: [],
       currentUser: null,
+      mainUser: null,
     };
   },
 
@@ -25,19 +26,19 @@ const store: Store<IRootState> = createStore({
   },
 
   mutations: {
-    isLodingChange(state: IRootState): void {
+    isLodingChange(state: IRootState) {
       state.isLoading = !state.isLoading;
     },
 
-    isAuthorizedChange(state: IRootState): void {
+    isAuthorizedChange(state: IRootState) {
       state.isAuthorized = !state.isAuthorized;
     },
 
-    isVisibleTheChatsPanelChange(state: IRootState, toBoolean: boolean): void {
+    isVisibleTheChatsPanelChange(state: IRootState, toBoolean: boolean) {
       state.isVisibleTheChatsPanel = toBoolean;
     },
 
-    isVisibleChatChange(state: IRootState, toBoolean: boolean): void {
+    isVisibleChatChange(state: IRootState, toBoolean: boolean) {
       state.isVisibleChat = toBoolean;
     },
 
@@ -47,6 +48,10 @@ const store: Store<IRootState> = createStore({
 
     setCurrentUser(state: IRootState, User: User) {
       state.currentUser = User;
+    },
+
+    setMainUser(state: IRootState, User: User) {
+      state.mainUser = User;
     },
   },
 });
