@@ -15,7 +15,7 @@
 
     <p
       v-timer-if="{ flag: Store.state.usersList.length === 0, time: 600 }"
-      class="w-full self-center text-center select-none"
+      class="w-full self-center text-center"
     >
       Чатов пока нет
     </p>
@@ -44,9 +44,11 @@ const chatsPanel: Ref<HTMLElement> = ref(null);
 let startX = 0;
 let startWidth = 0;
 let documentWidth = ref(document.documentElement.offsetWidth);
+let allElement = null;
 
 onMounted(() => {
   startWidth = chatsPanel.value.offsetWidth;
+  allElement = document.querySelectorAll("p, img");
 
   window.addEventListener(`resize`, () => {
     documentWidth.value = document.documentElement.offsetWidth;
@@ -62,6 +64,10 @@ function currentItemClick(item: HTMLDivElement) {
 function changePanelWidth(event: MouseEvent) {
   startX = chatsPanel.value.offsetWidth - event.clientX;
 
+  allElement.forEach((element: HTMLElement) => {
+    element.style.userSelect = `none`;
+  });
+
   document.addEventListener("mousemove", onMouseMove);
 
   function onMouseMove(event: MouseEvent) {
@@ -71,9 +77,13 @@ function changePanelWidth(event: MouseEvent) {
     )}px`;
   }
 
-  document.addEventListener("mouseup", () =>
-    document.removeEventListener("mousemove", onMouseMove)
-  );
+  document.addEventListener("mouseup", () => {
+    document.removeEventListener("mousemove", onMouseMove);
+
+    allElement.forEach((element: HTMLElement) => {
+      element.style.userSelect = `auto`;
+    });
+  });
 }
 </script>
 
