@@ -21,9 +21,19 @@
 <script lang="ts" setup>
 import { onMounted } from "vue";
 import { useStore } from "vuex";
+import { usePrimeVue } from "primevue/config";
+const PrimeVue = usePrimeVue();
 
 const store = useStore();
 onMounted(() => setTimeout(() => store.commit(`isLodingChange`), 1000));
+
+if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+  store.commit(`theme/changeTheme`, true);
+  PrimeVue.changeTheme("soho-light", "soho-dark", "theme-link");
+} else {
+  store.commit(`theme/changeTheme`, false);
+  PrimeVue.changeTheme("soho-dark", "soho-light", "theme-link");
+}
 </script>
 
 <style lang="scss">

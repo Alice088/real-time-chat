@@ -25,6 +25,8 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   if (to.name === "home" && !store.state.isAuthorized) {
     next({ name: "registration" });
+  } else if (to.name === "registration" && store.state.isAuthorized) {
+    next({ name: "home" });
   } else {
     next();
   }

@@ -15,6 +15,8 @@ import TheChatPanel from "@/components/TheChatsPanel.vue";
 import TheChat from "@/components/TheChat.vue";
 import TheItemOfChatsPanelList from "@/components/TheItemOfChatsPanelList.vue";
 import Dialog from "primevue/dialog";
+import TheSearchUsers from "@/components/TheSearchUsers.vue";
+import TheSettingsButton from "@/components/UI/TheSettingsButtons.vue";
 
 const components: Component[] = [
   Button,
@@ -33,6 +35,8 @@ const components: Component[] = [
   TheButton,
   TheItemOfChatsPanelList,
   Dialog,
+  TheSearchUsers,
+  TheSettingsButton,
 ];
 
 export default components;

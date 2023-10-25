@@ -13,3 +13,18 @@ export default defineComponent({
   name: "TheButton",
 });
 </script>
+
+<style scoped lang="scss">
+button:disabled {
+  &:active {
+    transform: none;
+  }
+
+  &:hover {
+    background: none;
+  }
+
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+</style>

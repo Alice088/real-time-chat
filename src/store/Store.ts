@@ -4,6 +4,8 @@ import StateOfTheme from "@/store/StateOfTheme";
 import { IRootState } from "@/interfaces/IRootState";
 import { User } from "@/classes/User";
 
+const gosha = new User(`Gosha`);
+
 const store: Store<IRootState> = createStore({
   modules: {
     theme: StateOfTheme,
@@ -15,7 +17,7 @@ const store: Store<IRootState> = createStore({
       isAuthorized: false,
       isVisibleTheChatsPanel: true,
       isVisibleChat: true,
-      usersList: [],
+      usersList: [gosha, gosha, gosha],
       currentUser: null,
       mainUser: null,
     };

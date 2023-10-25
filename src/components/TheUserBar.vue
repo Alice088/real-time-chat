@@ -15,16 +15,7 @@
       </p>
     </div>
 
-    <TheButton>
-      <img
-        :src="
-          Store.state.theme.dark
-            ? require('@/assets/icons/parameter-light.png')
-            : require('@/assets/icons/parameter.png')
-        "
-        alt="parameter"
-      />
-    </TheButton>
+    <TheSettingsButton />
   </div>
 </template>
 
@@ -39,6 +30,7 @@ export default defineComponent({
 
 <script lang="ts" setup>
 import TheButton from "@/components/UI/TheButton.vue";
+import TheSettingButton from "@/components/UI/TheSettingsButtons.vue";
 
 const Store = useStore();
 let windwosWidth = ref(0);

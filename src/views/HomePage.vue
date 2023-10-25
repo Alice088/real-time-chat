@@ -25,8 +25,8 @@ import Store from "@/store/Store";
 const isMobileOrTable = device.mobile() || device.tablet();
 
 onMounted(() => {
-  if (isMobileOrTable) Store.commit(`isVisibleTheChatsPanelChange`);
-  else window.addEventListener("resize", resizeHandler);
+  if (!isMobileOrTable) window.addEventListener("resize", resizeHandler);
+  else Store.commit(`isVisibleTheChatsPanelChange`, false);
 
   if (Store.state.isFirstEntry) {
     setTimeout(() => {
@@ -40,7 +40,7 @@ function resizeHandler() {
     document.querySelector(`.home__chatsPanel`);
 
   if (document.documentElement.clientWidth < 1200) {
-    if (!Store.state.isVisibleChat) Store.commit(`isVisibleChatChange`, false);
+    Store.commit(`isVisibleChatChange`, false);
     if (chatsPanel) chatsPanel.style.width = `auto`;
   } else {
     Store.commit(`isVisibleChatChange`, true);

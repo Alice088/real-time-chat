@@ -1,31 +1,35 @@
 <template>
   <div class="home__chatsPanel" ref="chatsPanel">
-    <div class="h-[100svh] overflow-y-scroll">
-      <transition-group name="itemOfChatList" appear>
-        <TheItemOfChatsPanelList
-          v-for="user in Store.getters.usersList"
-          :key="user.id"
-          @currentItem="currentItemClick($event)"
-          :user="user"
-        >
-          <img :src="user.avatarImage" alt="avatar Image" />
-          <p>{{ user.getName() }}</p>
-        </TheItemOfChatsPanelList>
-      </transition-group>
+    <TheSearchUsers />
+
+    <div class="flex h-full">
+      <div class="h-full overflow-y-scroll">
+        <transition-group name="itemOfChatList" appear>
+          <TheItemOfChatsPanelList
+            v-for="user in Store.getters.usersList"
+            :key="user.id"
+            @currentItem="currentItemClick($event)"
+            :user="user"
+          >
+            <img :src="user.avatarImage" alt="avatar Image" />
+            <p>{{ user.getName() }}</p>
+          </TheItemOfChatsPanelList>
+        </transition-group>
+      </div>
+
+      <p
+        v-timer-if="{ flag: Store.state.usersList.length === 0, time: 600 }"
+        class="w-full self-center text-center"
+      >
+        Чатов пока нет
+      </p>
+
+      <div
+        v-if="documentWidth > 1200"
+        @mousedown="changePanelWidth"
+        class="w-2 cursor-ew-resize"
+      ></div>
     </div>
-
-    <p
-      v-timer-if="{ flag: Store.state.usersList.length === 0, time: 600 }"
-      class="w-full self-center text-center"
-    >
-      Чатов пока нет
-    </p>
-
-    <div
-      v-if="documentWidth > 1200"
-      @mousedown="changePanelWidth"
-      class="w-2 cursor-ew-resize"
-    ></div>
   </div>
 </template>
 
@@ -40,6 +44,8 @@ export default defineComponent({
 </script>
 
 <script lang="ts" setup>
+import TheSearchUsers from "@/components/TheSearchUsers.vue";
+
 let lastItem: HTMLDivElement;
 const chatsPanel: Ref<HTMLElement> = ref(null);
 let startX = 0;
@@ -91,6 +97,7 @@ function changePanelWidth(event: MouseEvent) {
 <style lang="scss" scoped>
 .home__chatsPanel {
   display: flex;
+  flex-direction: column;
   transition: 150ms ease-in-out background-color;
   backdrop-filter: blur(40px) brightness(85%);
   background-color: rgba(0, 0, 0, 0);

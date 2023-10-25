@@ -4,8 +4,8 @@ const StateOfTheme = {
   }),
 
   mutations: {
-    changeTheme(state: { dark: boolean }): void {
-      state.dark = !state.dark;
+    changeTheme(state: { dark: boolean }, toBoolean: boolean): void {
+      state.dark = toBoolean;
     },
   },
 
