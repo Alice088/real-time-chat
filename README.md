@@ -1,6 +1,2 @@
 # real-time-chat
-This is my first big project where it will be serious,
-I develop real-time-chat, here I did unit tests for the first time,
-I used vue 3 with composition Api (I switched from React), worked with vuex,
-vue router, my first time with TypeScript, chai, mocha test libraries,
-worked with animations and primevue component library, bye bye
+this project was a small messenger, but I finished it not to the end because it was choking me, but I got a lot of knowledge from it, working with ts, vue(composition api and option api), with the vue ecosystem, with other libraries, how to fix not clear library code, hardened me to problem solving, taught me to work with unit tests, and just gave me a lot of experience, but it's time to close it, goodbye project
